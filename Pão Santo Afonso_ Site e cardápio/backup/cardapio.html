@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Cardápio · Pão Santo Afonso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Mulish:wght@400;500;600;700&family=Playball&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FBF6F0;color:#4E1A2A;font-family:Mulish,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#4E1A2A;text-decoration:none}
+a:hover{color:#B4683C}
+*{box-sizing:border-box}
+input,textarea,button{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#FBF6F0;padding-bottom:120px">
+
+<header style="position:sticky;top:0;z-index:20;background:#2A0E17;color:#F3EADB;height:64px">
+  <div style="height:64px;padding:0 clamp(20px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:20px">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;color:#F3EADB">
+      <img src="assets/selo-neg.png" alt="Selo Pão Santo Afonso" style="width:42px;height:42px;display:block;border-radius:50%">
+      <span style="display:flex;flex-direction:column;line-height:1">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500">Pão Santo Afonso</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:.4em;color:#C9A27A;margin-top:4px;font-weight:600">CONFEITARIA</span>
+      </span>
+    </a>
+    <nav style="display:flex;align-items:center;gap:clamp(18px,3vw,40px);font-size:14px;font-weight:500">
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><a href="index.html" style="color:#F3EADB;padding:12px 0">Início</a></sc-if>
+      <button onClick="{{ openCart }}" style="display:flex;align-items:center;gap:10px;background:transparent;color:#F3EADB;border:none;border:1px solid rgba(201,162,122,.7);padding:0 16px;min-height:44px;font-size:14px;font-weight:500;cursor:pointer">
+        <span>Meu pedido</span>
+        <span style="font-size:12px;color:#C9A27A">({{ count }})</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<section data-screen-label="Cardápio topo" style="background:#2A0E17;color:#F3EADB;overflow:hidden">
+  <div style="padding:clamp(56px,10vh,110px) clamp(20px,4vw,56px) clamp(48px,8vh,88px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(40px,6vw,96px);align-items:end">
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(72px,11vw,170px);line-height:.85;letter-spacing:-.02em">Cardá<span style="font-style:italic">pio</span></h1>
+      <p style="margin:0;max-width:30em;font-size:16px;line-height:1.7;color:#E6D3BD">Monte seu pedido e envie pelo WhatsApp. A gente confirma a data e separa tudo com carinho. Preços a combinar com o cliente.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:end">
+      <div style="aspect-ratio:3/4;overflow:hidden;transform:translateY(-24px)"><img src="assets/morango.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9) brightness(.9)"></div>
+      <div style="aspect-ratio:3/5;overflow:hidden"><img src="assets/sonho.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9) brightness(.9)"></div>
+      <div style="aspect-ratio:3/4;overflow:hidden;transform:translateY(-48px)"><img src="assets/quindim.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9) brightness(.9)"></div>
+    </div>
+  </div>
+</section>
+
+<div style="position:sticky;top:64px;z-index:10;background:#FBF6F0;border-bottom:1px solid #E8DCCB">
+  <div style="max-width:1240px;margin:0 auto;padding:0 clamp(18px,4vw,48px);display:flex;gap:clamp(20px,3vw,40px);overflow-x:auto">
+    <sc-for list="{{ cats }}" as="c" hint-placeholder-count="5">
+      <sc-if value="{{ c.active }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ c.pick }}" style="flex:none;background:none;color:#4E1A2A;border:none;border-bottom:2px solid #4E1A2A;padding:18px 0 16px;font-size:15px;font-weight:700;cursor:pointer">{{ c.label }}</button>
+      </sc-if>
+      <sc-if value="{{ c.inactive }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ c.pick }}" style="flex:none;background:none;color:#8A6B71;border:none;border-bottom:2px solid transparent;padding:18px 0 16px;font-size:15px;font-weight:500;cursor:pointer" style-hover="color:#4E1A2A">{{ c.label }}</button>
+      </sc-if>
+    </sc-for>
+  </div>
+</div>
+
+<main style="max-width:1240px;margin:0 auto;padding:clamp(36px,5vw,64px) clamp(18px,4vw,48px);display:flex;flex-direction:column;gap:clamp(56px,7vw,88px)">
+  <sc-for list="{{ grupos }}" as="g" hint-placeholder-count="2">
+    <section style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;align-items:center;gap:18px">
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.01em;white-space:nowrap">{{ g.label }}</h2>
+        <span style="flex:1;height:1px;background:#D9C6AE;align-self:center"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,{{ minCol }}),1fr));gap:clamp(18px,2.4vw,32px)">
+        <sc-for list="{{ g.itens }}" as="p" hint-placeholder-count="3">
+          <article style="display:flex;flex-direction:column">
+            <div style="position:relative;aspect-ratio:4/5;background:#F3EADB;overflow:hidden">
+              <img src="{{ p.img }}" alt="{{ p.nome }}" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.95) contrast(1.04)">
+              <sc-if value="{{ p.selo }}" hint-placeholder-val="{{ false }}">
+                <span style="position:absolute;top:14px;left:14px;display:flex;align-items:center;gap:6px;background:#4E1A2A;color:#F3EADB;padding:6px 12px 6px 10px;font-size:12px;font-weight:700;letter-spacing:.04em">
+                  <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 0L7.6 4.4L12 6L7.6 7.6L6 12L4.4 7.6L0 6L4.4 4.4Z" fill="#F3EADB"></path></svg>
+                  <span>{{ p.selo }}</span>
+                </span>
+              </sc-if>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;padding:20px 0 0;flex:1">
+              <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:28px;line-height:1.08">{{ p.nome }}</h3>
+              <p style="margin:0;font-size:14.5px;line-height:1.6;color:#6E4B53;text-wrap:pretty">{{ p.desc }}</p>
+              <sc-if value="{{ p.hasVar }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+                  <sc-for list="{{ p.vars }}" as="v" hint-placeholder-count="2">
+                    <sc-if value="{{ v.active }}" hint-placeholder-val="{{ false }}">
+                      <button onClick="{{ v.pick }}" style="background:#F3EADB;color:#4E1A2A;border:1.5px solid #B4683C;padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer">{{ v.label }}</button>
+                    </sc-if>
+                    <sc-if value="{{ v.inactive }}" hint-placeholder-val="{{ true }}">
+                      <button onClick="{{ v.pick }}" style="background:transparent;color:#6E4B53;border:1.5px solid #E2D4C1;padding:6px 14px;border-radius:999px;font-size:13px;font-weight:500;cursor:pointer">{{ v.label }}</button>
+                    </sc-if>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:14px">
+                <span style="font-size:13.5px;color:#8A6B71">{{ p.un }}</span>
+                <sc-if value="{{ p.notIn }}" hint-placeholder-val="{{ true }}">
+                  <button onClick="{{ p.add }}" style="background:#4E1A2A;color:#F3EADB;border:none;padding:12px 20px;border-radius:999px;font-size:14.5px;font-weight:600;cursor:pointer;min-height:44px" style-hover="background:#6A2A3C">Adicionar</button>
+                </sc-if>
+                <sc-if value="{{ p.isIn }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:4px;background:#F3EADB;border-radius:999px;padding:4px">
+                    <button onClick="{{ p.dec }}" aria-label="Diminuir" style="width:38px;height:38px;border-radius:50%;border:none;background:#FBF6F0;color:#4E1A2A;font-size:20px;cursor:pointer;line-height:1">−</button>
+                    <span style="min-width:30px;text-align:center;font-weight:700;font-size:16px">{{ p.qtd }}</span>
+                    <button onClick="{{ p.inc }}" aria-label="Aumentar" style="width:38px;height:38px;border-radius:50%;border:none;background:#4E1A2A;color:#F3EADB;font-size:20px;cursor:pointer;line-height:1">+</button>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+  </sc-for>
+</main>
+
+<sc-if value="{{ showBar }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:0;right:0;bottom:20px;z-index:30;display:flex;justify-content:center;padding:0 16px;pointer-events:none">
+    <button onClick="{{ openCart }}" style="pointer-events:auto;display:flex;align-items:center;gap:18px;background:#4E1A2A;color:#F3EADB;border:none;border-radius:999px;padding:10px 10px 10px 24px;box-shadow:0 14px 40px rgba(78,26,42,.28);cursor:pointer;max-width:520px;width:100%;justify-content:space-between">
+      <span style="display:flex;flex-direction:column;align-items:flex-start;gap:1px">
+        <span style="font-size:18px;font-weight:700">{{ countTxt }}</span>
+        <span style="font-size:13px;color:#E0CDB8">Preços a combinar com o cliente</span>
+      </span>
+      <span style="background:#F3EADB;color:#4E1A2A;border-radius:999px;padding:12px 22px;font-weight:700;font-size:15px">Ver pedido</span>
+    </button>
+  </div>
+</sc-if>
+
+<sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:50;display:flex;justify-content:flex-end">
+    <div onClick="{{ closeCart }}" style="position:absolute;inset:0;background:rgba(46,14,24,.45)"></div>
+    <aside data-screen-label="Carrinho" style="position:relative;width:min(460px,100%);height:100%;background:#FBF6F0;display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(46,14,24,.2)">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid #E8DCCB">
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.34em;color:#B4683C;font-weight:600">SEU PEDIDO</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500;line-height:1.1">Separado com carinho</span>
+        </div>
+        <button onClick="{{ closeCart }}" aria-label="Fechar" style="width:44px;height:44px;border-radius:50%;border:1px solid #E2D4C1;background:transparent;color:#4E1A2A;font-size:22px;cursor:pointer;line-height:1">×</button>
+      </div>
+
+      <div style="flex:1;overflow-y:auto;padding:8px 24px 24px">
+        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:56px 12px">
+            <img src="assets/selo-color.png" alt="" style="width:96px;height:96px;opacity:.9">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500">Seu pedido está vazio</span>
+            <span style="font-size:15px;line-height:1.6;color:#6E4B53;max-width:22em">Escolha no cardápio o que você quer levar. A gente cuida do resto.</span>
+            <button onClick="{{ closeCart }}" style="margin-top:6px;background:#4E1A2A;color:#F3EADB;border:none;padding:13px 24px;border-radius:999px;font-size:15px;font-weight:600;cursor:pointer">Ver o cardápio</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ hasItems }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column">
+            <sc-for list="{{ cartItems }}" as="it" hint-placeholder-count="2">
+              <div style="display:flex;gap:14px;padding:16px 0;border-bottom:1px solid #EADFCF;align-items:center">
+                <img src="{{ it.img }}" alt="" style="width:64px;height:64px;border-radius:32px 32px 10px 10px;object-fit:cover;flex:none;display:block">
+                <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;line-height:1.15">{{ it.nome }}</span>
+                  <span style="font-size:13px;color:#8A6B71">{{ it.detalhe }}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:2px;background:#F3EADB;border-radius:999px;padding:3px;flex:none">
+                  <button onClick="{{ it.dec }}" aria-label="Diminuir" style="width:34px;height:34px;border-radius:50%;border:none;background:#FBF6F0;color:#4E1A2A;font-size:18px;cursor:pointer;line-height:1">−</button>
+                  <span style="min-width:26px;text-align:center;font-weight:700;font-size:15px">{{ it.qtd }}</span>
+                  <button onClick="{{ it.inc }}" aria-label="Aumentar" style="width:34px;height:34px;border-radius:50%;border:none;background:#4E1A2A;color:#F3EADB;font-size:18px;cursor:pointer;line-height:1">+</button>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:16px;margin-top:24px">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#6E4B53">
+              <span>Seu nome</span>
+              <input value="{{ fNome }}" onChange="{{ setNome }}" placeholder="Como a gente te chama" style="height:48px;border:1px solid #E2D4C1;border-radius:12px;padding:0 14px;font-size:16px;background:#FFFFFF;color:#4E1A2A;outline-color:#B4683C">
+            </label>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:13px;font-weight:600;color:#6E4B53">Como prefere receber</span>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#F3EADB;border-radius:14px;padding:4px">
+                <sc-for list="{{ modos }}" as="m" hint-placeholder-count="2">
+                  <sc-if value="{{ m.active }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ m.pick }}" style="height:42px;border:none;border-radius:10px;background:#FFFFFF;color:#4E1A2A;font-size:14.5px;font-weight:700;cursor:pointer;box-shadow:0 1px 3px rgba(78,26,42,.12)">{{ m.label }}</button>
+                  </sc-if>
+                  <sc-if value="{{ m.inactive }}" hint-placeholder-val="{{ true }}">
+                    <button onClick="{{ m.pick }}" style="height:42px;border:none;border-radius:10px;background:transparent;color:#6E4B53;font-size:14.5px;font-weight:500;cursor:pointer">{{ m.label }}</button>
+                  </sc-if>
+                </sc-for>
+              </div>
+            </div>
+            <sc-if value="{{ isEntrega }}" hint-placeholder-val="{{ false }}">
+              <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#6E4B53">
+                <span>Endereço de entrega</span>
+                <input value="{{ fEnd }}" onChange="{{ setEnd }}" placeholder="Rua, número, bairro" style="height:48px;border:1px solid #E2D4C1;border-radius:12px;padding:0 14px;font-size:16px;background:#FFFFFF;color:#4E1A2A;outline-color:#B4683C">
+              </label>
+            </sc-if>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#6E4B53">
+              <span>Para quando</span>
+              <input type="date" value="{{ fData }}" onChange="{{ setData }}" style="height:48px;border:1px solid #E2D4C1;border-radius:12px;padding:0 14px;font-size:16px;background:#FFFFFF;color:#4E1A2A;outline-color:#B4683C">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#6E4B53">
+              <span>Observações</span>
+              <textarea value="{{ fObs }}" onChange="{{ setObs }}" rows="3" placeholder="Frase no bolo, alergias, horário…" style="border:1px solid #E2D4C1;border-radius:12px;padding:12px 14px;font-size:16px;background:#FFFFFF;color:#4E1A2A;resize:vertical;outline-color:#B4683C"></textarea>
+            </label>
+          </div>
+        </sc-if>
+      </div>
+
+      <sc-if value="{{ hasItems }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:18px 24px 24px;border-top:1px solid #E8DCCB;background:#FBF6F0;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600">{{ countTxt }}</span>
+            <span style="font-size:14px;color:#6E4B53;text-align:right">Preços a combinar com o cliente</span>
+          </div>
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#F3EADB;border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.5;color:#4E1A2A">Pedido aberto no WhatsApp. Assim que a gente responder, está confirmado. <button onClick="{{ clearCart }}" style="background:none;border:none;padding:0;color:#B4683C;font-weight:700;cursor:pointer;font-size:14px;text-decoration:underline">Limpar pedido</button></div>
+          </sc-if>
+          <button onClick="{{ send }}" style="height:54px;border:none;border-radius:999px;background:#4E1A2A;color:#F3EADB;font-size:16px;font-weight:700;cursor:pointer" style-hover="background:#6A2A3C">Enviar pedido pelo WhatsApp</button>
+          <span style="font-size:12.5px;line-height:1.5;color:#8A6B71;text-align:center">O valor e a data são combinados com você na conversa.</span>
+        </div>
+      </sc-if>
+    </aside>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;(54) 99948-6578&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;colunas&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;2&quot;,&quot;3&quot;],&quot;default&quot;:&quot;3&quot;,&quot;tsType&quot;:&quot;'2'|'3'&quot;}}">
+class Component extends DCLogic {
+  state = { vw: typeof window !== 'undefined' ? window.innerWidth : 1200, cart: [], cat: 'todos', sel: {}, open: false, sent: false, nome: '', modo: 'retirada', end: '', data: '', obs: '' };
+
+  produtos = [
+    { id: 'redvelvet', cat: 'bolos', nome: 'Bolo Red Velvet', desc: 'Massa aveludada em camadas, recheio e cobertura de cream cheese.', preco: 120, un: 'bolo inteiro', img: 'assets/red-velvet.jpg' },
+    { id: 'brigadeiro', cat: 'docinhos', nome: 'Brigadeiros', desc: 'Chocolate de verdade, enrolados um a um e passados no granulado.', preco: 30, un: 'caixa com 12', img: 'assets/brigadeiros.jpg' },
+    { id: 'beijinho', cat: 'docinhos', nome: 'Beijinho', desc: 'Coco e leite condensado no ponto, com o cravinho em cima.', preco: 30, un: 'caixa com 12', img: 'assets/beijinho.jpg' },
+    { id: 'morango', cat: 'docinhos', nome: 'Morango cravejado', desc: 'Morango inteiro coberto de chocolate branco e crocante de morango.', preco: 7, un: 'unidade', img: 'assets/morango.jpg' },
+    { id: 'quindim', cat: 'docinhos', nome: 'Quindim', desc: 'Gema, coco e açúcar, com o brilho que só o forno dá.', preco: 8, un: 'unidade', img: 'assets/quindim.jpg' },
+    { id: 'sonho', cat: 'paes', nome: 'Sonho', desc: 'Massa fofinha, frita na hora e recheada até a borda.', preco: 9, un: 'unidade', img: 'assets/sonho.jpg', vars: ['Creme', 'Doce de leite'] },
+    { id: 'trancado', cat: 'paes', nome: 'Pão trançado', desc: 'Três massas trançadas: beterraba, batata e brócolis.', preco: 22, un: 'unidade', img: 'assets/pao-trancado.jpg' },
+    { id: 'grostoli', cat: 'paes', nome: 'Grostoli', desc: 'Massa fina e crocante, frita e polvilhada com açúcar.', preco: 18, un: 'pacote', img: 'assets/grostoli.jpg' },
+    { id: 'panetone', cat: 'datas', nome: 'Panetone e chocotone', desc: 'Fermentação longa, frutas ou gotas de chocolate. Só na época de Natal.', preco: 45, un: 'unidade', img: 'assets/panetones.jpg', vars: ['Panetone', 'Chocotone'], selo: 'Natal' }
+  ];
+  cats = [['todos', 'Tudo'], ['bolos', 'Bolos'], ['docinhos', 'Docinhos'], ['paes', 'Pães e massas'], ['datas', 'Datas especiais']];
+
+  componentDidMount() {
+    this.onR = () => { if (window.innerWidth !== this.state.vw) this.setState({ vw: window.innerWidth }); };
+    window.addEventListener('resize', this.onR);
+    try { this.setState({ cart: JSON.parse(localStorage.getItem('psa-cart') || '[]') }); } catch (e) {}
+  }
+  save(cart) {
+    this.setState({ cart, sent: false });
+    try { localStorage.setItem('psa-cart', JSON.stringify(cart)); } catch (e) {}
+  }
+  change(key, d, p, variante) {
+    let cart = this.state.cart.map(i => ({ ...i }));
+    const it = cart.find(i => i.key === key);
+    if (it) it.qtd += d;
+    else if (d > 0) cart.push({ key, id: p.id, nome: p.nome, variante, preco: p.preco, un: p.un, img: p.img, qtd: d });
+    cart = cart.filter(i => i.qtd > 0);
+    this.save(cart);
+  }
+  brl(v) { return 'R$ ' + v.toFixed(2).replace('.', ','); }
+
+  send() {
+    const s = this.state;
+    const num = (this.props.whatsapp ?? '(54) 99948-6578').replace(/\D/g, '');
+    const total = s.cart.reduce((t, i) => t + i.preco * i.qtd, 0);
+    const linhas = s.cart.map(i => `• ${i.qtd}× ${i.nome}${i.variante ? ' (' + i.variante + ')' : ''} · ${i.un}`);
+    let data = '';
+    if (s.data) { const [y, m, d] = s.data.split('-'); data = `${d}/${m}/${y}`; }
+    const msg = [
+      'Olá! Quero fazer um pedido no Pão Santo Afonso:', '', ...linhas, '',
+      'Preços a combinar.',
+      s.nome && `Nome: ${s.nome}`,
+      `Recebimento: ${s.modo === 'entrega' ? 'Entrega' + (s.end ? ' — ' + s.end : '') : 'Retirada'}`,
+      data && `Para: ${data}`,
+      s.obs && `Obs.: ${s.obs}`
+    ].filter(x => x !== false && x !== undefined && x !== null && x !== 0).join('\n');
+    window.open('https://wa.me/55' + num + '?text=' + encodeURIComponent(msg), '_blank');
+    this.setState({ sent: true });
+  }
+
+  renderVals() {
+    const s = this.state;
+    const count = s.cart.reduce((t, i) => t + i.qtd, 0);
+    const total = s.cart.reduce((t, i) => t + i.preco * i.qtd, 0);
+    const qtyOf = key => (s.cart.find(i => i.key === key) || {}).qtd || 0;
+    const colunas = this.props.colunas ?? '3';
+
+    const card = p => {
+      const vi = s.sel[p.id] || 0;
+      const variante = p.vars ? p.vars[vi] : null;
+      const key = p.id + (variante ? ':' + variante : '');
+      const q = qtyOf(key);
+      return {
+        ...p, selo: p.selo || null, hasVar: !!p.vars, precoTxt: this.brl(p.preco), qtd: q, isIn: q > 0, notIn: q === 0,
+        vars: (p.vars || []).map((label, idx) => ({ label, active: idx === vi, inactive: idx !== vi, pick: () => this.setState(st => ({ sel: { ...st.sel, [p.id]: idx } })) })),
+        add: () => this.change(key, 1, p, variante),
+        inc: () => this.change(key, 1, p, variante),
+        dec: () => this.change(key, -1, p, variante)
+      };
+    };
+
+    const grupos = this.cats.slice(1)
+      .filter(([id]) => s.cat === 'todos' || s.cat === id)
+      .map(([id, label]) => ({ label, itens: this.produtos.filter(p => p.cat === id).map(card) }))
+      .filter(g => g.itens.length);
+
+    return {
+      wide: s.vw >= 520,
+      minCol: colunas === '2' ? '380px' : '270px',
+      cats: this.cats.map(([id, label]) => ({ label, active: s.cat === id, inactive: s.cat !== id, pick: () => this.setState({ cat: id }) })),
+      grupos,
+      count,
+      countTxt: count === 1 ? '1 item no pedido' : count + ' itens no pedido',
+      totalTxt: this.brl(total),
+      showBar: count > 0 && !s.open,
+      open: s.open,
+      openCart: () => this.setState({ open: true }),
+      closeCart: () => this.setState({ open: false }),
+      isEmpty: count === 0,
+      hasItems: count > 0,
+      cartItems: s.cart.map(i => ({
+        ...i,
+        detalhe: [i.variante, i.un].filter(Boolean).join(' · '),
+        subTxt: this.brl(i.preco * i.qtd),
+        inc: () => this.change(i.key, 1, i, i.variante),
+        dec: () => this.change(i.key, -1, i, i.variante)
+      })),
+      modos: [['retirada', 'Retirada'], ['entrega', 'Entrega']].map(([id, label]) => ({ label, active: s.modo === id, inactive: s.modo !== id, pick: () => this.setState({ modo: id }) })),
+      isEntrega: s.modo === 'entrega',
+      fNome: s.nome, fEnd: s.end, fData: s.data, fObs: s.obs,
+      setNome: e => this.setState({ nome: e.target.value }),
+      setEnd: e => this.setState({ end: e.target.value }),
+      setData: e => this.setState({ data: e.target.value }),
+      setObs: e => this.setState({ obs: e.target.value }),
+      sent: s.sent,
+      send: () => this.send(),
+      clearCart: () => { this.save([]); this.setState({ sent: false, open: false }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

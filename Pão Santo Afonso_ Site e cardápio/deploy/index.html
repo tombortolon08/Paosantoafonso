@@ -1,72 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pão Santo Afonso · Confeitaria</title>
 <script src="./support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<title>Pão Santo Afonso · Confeitaria</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Mulish:wght@400;500;600;700&family=Playball&display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#2A0E17;color:#F3EADB;font-family:Mulish,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
 a{color:inherit;text-decoration:none}
 a:hover{color:#C9A27A}
 *{box-sizing:border-box}
+button{font-family:inherit}
+:focus-visible{outline:2px solid #C9A27A;outline-offset:3px}
+.psa-mq{animation:psa-mq 60s linear infinite}
+.psa-mq-r{animation:psa-mq 70s linear infinite reverse}
+@keyframes psa-mq{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+.psa-track{scrollbar-width:none}
+.psa-track::-webkit-scrollbar{display:none}
+.psa-fade{animation:psa-fade .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes psa-fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+@media (max-width:640px){
+.psa-hide-m{display:none !important}
+.psa-brand{font-size:19px !important}
+.psa-brand-sub{font-size:9px !important}
+#hero-cta{flex-direction:column;align-items:stretch}
+#hero-cta a{justify-content:center}
+.psa-tabs{grid-template-columns:repeat(5,minmax(0,1fr)) !important;gap:6px !important;overflow:visible !important;margin:0 !important;padding:0 !important}
+.psa-tab{align-items:center !important;text-align:center !important;padding:10px 4px !important;min-height:64px !important;border-radius:12px !important;gap:4px !important}
+.psa-tab > span:first-child{justify-content:center !important;flex-direction:column;gap:3px !important}
+.psa-tab-nome{font-size:15px !important}
+.psa-panel{border-radius:18px !important;padding:10px !important;gap:8px !important}
+.psa-ph{aspect-ratio:4/3 !important}
+.psa-card{width:76vw !important}
+.psa-casa{min-height:100vw !important}
+.psa-cor{grid-template-columns:none !important;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 4px;scroll-padding:0 16px}
+.psa-cor > figure{scroll-snap-align:start}
+.psa-foot{padding-bottom:110px !important}
+}
+@media (max-width:370px){.psa-brand-sub{display:none}.psa-brand{font-size:17px !important}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.psa-mq,.psa-mq-r,.psa-fade{animation:none}}
 </style>
 </helmet>
-<div style="background:#2A0E17;position:relative">
+<div style="background:#2A0E17;position:relative;font-family:Mulish,sans-serif;color:#F3EADB">
 
-<sc-if value="{{ showGrain }}" hint-placeholder-val="{{ true }}"><div style="position:fixed;inset:0;z-index:60;pointer-events:none;background:url('assets/grao.svg');opacity:.09;mix-blend-mode:multiply"></div></sc-if>
-
-<div id="cursor" style="position:fixed;left:0;top:0;z-index:70;pointer-events:none;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#F3EADB;mix-blend-mode:difference;display:none;align-items:center;justify-content:center;transition:width .35s cubic-bezier(.2,.7,.2,1),height .35s cubic-bezier(.2,.7,.2,1),margin .35s cubic-bezier(.2,.7,.2,1)">
-  <span id="cursor-label" style="font-size:12px;font-weight:700;letter-spacing:.06em;color:#2A0E17"></span>
-</div>
-
-<header id="site-header" style="position:fixed;top:0;left:0;right:0;z-index:40;background:{{ navBg }};transition:background .5s ease,transform .6s cubic-bezier(.2,.7,.2,1)">
-  <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px clamp(20px,4vw,56px)">
-    <a id="header-logo" href="index.html" style="display:flex;align-items:center;gap:12px;color:#F3EADB">
-      <img src="assets/selo-neg.png" alt="Selo Pão Santo Afonso" style="width:46px;height:46px;display:block;border-radius:50%">
+<header id="site-header" style="position:fixed;top:0;left:0;right:0;z-index:40;background:{{ navBg }};backdrop-filter:{{ navBlur }};transition:background .4s ease,transform .5s cubic-bezier(.2,.7,.2,1)">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px clamp(16px,4vw,56px)">
+    <a id="header-logo" href="#topo" style="display:flex;align-items:center;gap:12px;color:#F3EADB">
+      <img src="assets/selo-neg.png" alt="" width="44" height="44" style="width:44px;height:44px;display:block;border-radius:50%">
       <span style="display:flex;flex-direction:column;line-height:1">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500">Pão Santo Afonso</span>
-        <span style="font-family:'Cormorant Garamond',serif;font-size:10.5px;letter-spacing:.4em;color:#C9A27A;margin-top:4px;font-weight:600">CONFEITARIA</span>
+        <span class="psa-brand" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500">Pão Santo Afonso</span>
+        <span class="psa-brand-sub" style="font-family:'Cormorant Garamond',serif;font-size:10.5px;letter-spacing:.4em;color:#C9A27A;margin-top:4px;font-weight:600">CONFEITARIA</span>
       </span>
     </a>
-    <nav id="header-nav" style="display:flex;align-items:center;gap:clamp(18px,3vw,40px);font-size:14px;font-weight:500;color:#F3EADB">
+    <nav aria-label="Principal" style="display:flex;align-items:center;gap:clamp(16px,2.6vw,36px);font-size:14px;font-weight:500;color:#F3EADB">
       <sc-if value="{{ showNavLinks }}" hint-placeholder-val="{{ true }}">
+        <a href="#cardapio" style="padding:12px 0">Cardápio</a>
         <a href="#fornada" style="padding:12px 0">A fornada</a>
         <a href="#casa" style="padding:12px 0">A casa</a>
       </sc-if>
-      <a href="cardapio.html" data-magnet="1" style="display:flex;align-items:center;gap:10px;border:1px solid rgba(201,162,122,.7);padding:0 18px;min-height:44px;border-radius:2px">
-        <span>Cardápio</span>
-        <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
-          <span style="font-size:12px;color:#C9A27A">({{ cartCount }})</span>
-        </sc-if>
+      <a href="{{ waLink }}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:#F3EADB;color:#4E1A2A;padding:0 18px;min-height:44px;border-radius:999px;font-weight:700">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.2A8.4 8.4 0 1 1 21 11.5z"></path></svg>
+        <span>Encomendar</span>
       </a>
     </nav>
   </div>
 </header>
 
-<section data-screen-label="Abertura" style="position:relative;height:100svh;min-height:620px;overflow:hidden;background:#2A0E17">
+<section id="topo" data-screen-label="Abertura" style="position:relative;height:100svh;min-height:600px;overflow:hidden;background:#2A0E17">
   <div id="hero-media" style="position:absolute;inset:0;will-change:transform">
     <sc-for list="{{ slides }}" as="s" hint-placeholder-count="1">
-      <img data-slide="{{ s.i }}" src="{{ s.img }}" alt="{{ s.nome }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ s.pos }};opacity:{{ s.op }};filter:saturate(.95) contrast(1.08) brightness(.8);display:block">
+      <img data-slide="{{ s.i }}" src="{{ s.img }}" alt="{{ s.nome }}" fetchpriority="{{ s.prio }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ s.pos }};opacity:{{ s.op }};filter:saturate(.95) contrast(1.08) brightness(.8);display:block">
     </sc-for>
   </div>
   <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(42,14,23,.97) 0%,rgba(42,14,23,.6) 36%,rgba(42,14,23,.15) 68%,rgba(42,14,23,.5) 100%)"></div>
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 38%,rgba(20,6,11,.6) 100%)"></div>
-  <div style="position:absolute;left:0;right:0;bottom:0;padding:0 clamp(20px,4vw,56px) clamp(28px,5vh,56px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px 32px;align-items:flex-end">
-    <div style="display:flex;flex-direction:column;gap:clamp(18px,3vh,32px);flex:1 1 520px;min-width:0">
+  <div style="position:absolute;left:0;right:0;bottom:0;padding:0 clamp(16px,4vw,56px) clamp(28px,5vh,56px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px 32px;align-items:flex-end">
+    <div style="display:flex;flex-direction:column;gap:clamp(18px,3vh,30px);flex:1 1 520px;min-width:0">
       <span id="hero-sub" style="font-size:13px;letter-spacing:.08em;color:#E6D3BD">Confeitaria caseira · receitas de convento, carinho de casa</span>
       <h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(56px,11.5vw,190px);line-height:.9;letter-spacing:-.02em;color:#F3EADB">
-        <span style="display:block;overflow:hidden;padding-bottom:.04em"><span id="hero-l1" style="display:block">Doces feitos</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.04em"><span id="hero-l1" style="display:block">Pães feitos</span></span>
         <span style="display:block;overflow:hidden;padding-bottom:.08em"><span id="hero-l2" style="display:block;font-style:italic;padding-left:.5em">com Amor</span></span>
       </h1>
+      <div id="hero-cta" style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="#cardapio" style="display:flex;align-items:center;gap:14px;background:#F3EADB;color:#4E1A2A;padding:0 26px;min-height:52px;border-radius:999px;font-weight:700;font-size:15px">
+          <span>Ver o cardápio da semana</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
+        </a>
+        <a href="{{ todayLink }}" style="display:flex;align-items:center;gap:10px;border:1px solid rgba(243,234,219,.55);color:#F3EADB;padding:0 22px;min-height:52px;border-radius:999px;font-weight:600;font-size:15px">
+          <span>{{ todayCta }}</span>
+        </a>
+      </div>
     </div>
-    <div id="hero-side" style="display:flex;flex-direction:column;align-items:flex-end;gap:14px;padding-bottom:14px;margin-left:auto">
+    <div id="hero-side" class="psa-hide-m" style="display:flex;flex-direction:column;align-items:flex-end;gap:14px;padding-bottom:14px;margin-left:auto">
       <span style="font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:#F3EADB">{{ slideNome }}</span>
       <div style="display:flex;gap:6px">
         <sc-for list="{{ slides }}" as="s" hint-placeholder-count="4">
@@ -82,7 +115,7 @@ a:hover{color:#C9A27A}
 <section id="intertitulo" data-screen-label="Intertítulo" style="position:relative;height:{{ interH }};background:#2A0E17">
   <div style="position:sticky;top:0;height:100svh;display:flex;align-items:center;justify-content:center;padding:0 clamp(24px,8vw,120px)">
     <div style="max-width:1040px;display:flex;flex-direction:column;align-items:center;gap:44px;text-align:center">
-      <img id="inter-selo" src="assets/selo-neg.png" alt="" style="width:76px;height:76px;display:block;border-radius:50%">
+      <img id="inter-selo" src="assets/selo-neg.png" alt="" loading="lazy" width="76" height="76" style="width:76px;height:76px;display:block;border-radius:50%">
       <p style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-style:italic;font-size:clamp(34px,4.6vw,68px);line-height:1.16;color:#F3EADB;display:flex;flex-wrap:wrap;justify-content:center;column-gap:.26em">
         <sc-for list="{{ interWords }}" as="w" hint-placeholder-count="12">
           <span data-w="1" style="opacity:.14;transition:opacity .25s linear">{{ w }}</span>
@@ -92,51 +125,152 @@ a:hover{color:#C9A27A}
   </div>
 </section>
 
-<section id="fornada" data-screen-label="A fornada" style="position:relative;background:#F3EADB;color:#4E1A2A">
-  <div style="position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding-top:clamp(92px,13vh,130px);padding-bottom:clamp(24px,4vh,44px)">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:0 clamp(20px,4vw,56px);flex-wrap:wrap">
-      <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(44px,6vw,92px);line-height:.9;letter-spacing:-.01em">A fornada</h2>
-      <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#6E4B53;min-width:240px">
-        <span id="fornada-count" style="font-variant-numeric:tabular-nums;color:#4E1A2A;font-weight:600;min-width:52px"></span>
-        <span style="flex:1;height:1px;background:#D9C6AE;position:relative;min-width:80px">
-          <span id="fornada-bar" style="position:absolute;left:0;top:0;height:1px;width:0%;background:#4E1A2A"></span>
-        </span>
-        <span>Preços a combinar com o cliente</span>
+<section id="cardapio" data-screen-label="Cardápio da semana" style="background:#FBF6F0;color:#4E1A2A">
+  <div style="max-width:1240px;margin:0 auto;padding:clamp(80px,12vh,140px) clamp(16px,4vw,48px) clamp(72px,10vh,120px);display:flex;flex-direction:column;gap:clamp(32px,4vw,48px)">
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px clamp(24px,5vw,80px);align-items:end">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-size:13px;letter-spacing:.08em;color:#B4683C;font-weight:700">CARDÁPIO DA SEMANA</span>
+        <h2 data-reveal="1" style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(44px,6vw,92px);line-height:.92;letter-spacing:-.01em">Cada dia, <span style="font-style:italic">uma fornada.</span></h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;justify-self:end;max-width:30em">
+        <p style="margin:0;font-size:16px;line-height:1.7;color:#6E4B53">Escolha o dia para ver o que sai do forno. As encomendas são feitas pelo WhatsApp.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="display:flex;align-items:center;gap:8px;background:#F3EADB;border:1px solid #E8DCCB;color:#4E1A2A;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+            Encomendas com 1 dia de antecedência
+          </span>
+          <span style="display:flex;align-items:center;gap:8px;background:#F3EADB;border:1px solid #E8DCCB;color:#4E1A2A;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600">
+            <svg width="14" height="14" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 0L7.6 4.4L12 6L7.6 7.6L6 12L4.4 7.6L0 6L4.4 4.4Z" fill="#B4683C"></path></svg>
+            Tortas sob encomenda
+          </span>
+        </div>
       </div>
     </div>
-    <div id="fornada-track" style="display:flex;align-items:flex-start;gap:clamp(16px,2.2vw,36px);padding:0 clamp(20px,4vw,56px);width:max-content;will-change:transform">
-      <sc-for list="{{ fornada }}" as="p" hint-placeholder-count="5">
-        <a href="cardapio.html" data-frame="1" style="display:flex;flex-direction:column;gap:0;color:#4E1A2A;flex:none;width:min(calc(min(56svh,560px) * .75),68vw)">
-          <div style="width:100%;aspect-ratio:3/4;overflow:hidden;background:#E6D9C6">
-            <img data-fimg="1" src="{{ p.img }}" alt="{{ p.nome }}" style="width:116%;height:100%;margin-left:-8%;object-fit:cover;display:block;filter:saturate(.95) contrast(1.04);will-change:transform">
-          </div>
-          <div style="display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;row-gap:4px;padding-top:16px;margin-top:16px;border-top:1px solid #D9C6AE">
-            <span style="font-size:12px;color:#B4683C;font-weight:600;padding-top:7px;font-variant-numeric:tabular-nums">{{ p.n }}</span>
-            <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2vw,28px);font-weight:500;line-height:1.1">{{ p.nome }}</span>
-          </div>
-        </a>
+
+    <div role="tablist" aria-label="Dias da semana" class="psa-track psa-tabs" style="display:grid;grid-template-columns:repeat(5,minmax(112px,1fr));gap:10px;overflow-x:auto;margin:0 calc(-1 * clamp(16px,4vw,48px));padding:4px clamp(16px,4vw,48px)">
+      <sc-for list="{{ dias }}" as="d" hint-placeholder-count="5">
+        <sc-if value="{{ d.active }}" hint-placeholder-val="{{ false }}">
+          <button class="psa-tab" role="tab" aria-selected="true" onClick="{{ d.pick }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#4E1A2A;color:#F3EADB;border:1px solid #4E1A2A;border-radius:16px;padding:16px 18px;min-height:88px;cursor:pointer;text-align:left;box-shadow:0 10px 28px rgba(78,26,42,.22)">
+            <span style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:8px">
+              <span style="font-size:12px;letter-spacing:.12em;font-weight:700;color:#C9A27A">{{ d.curto }}</span>
+              <sc-if value="{{ d.hoje }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:700;background:#C9A27A;color:#2A0E17;padding:2px 8px;border-radius:999px">Hoje</span></sc-if>
+            </span>
+            <span class="psa-tab-nome" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;line-height:1">{{ d.nome }}</span>
+          </button>
+        </sc-if>
+        <sc-if value="{{ d.inactive }}" hint-placeholder-val="{{ true }}">
+          <button class="psa-tab" role="tab" aria-selected="false" onClick="{{ d.pick }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#FFFFFF;color:#4E1A2A;border:1px solid #E8DCCB;border-radius:16px;padding:16px 18px;min-height:88px;cursor:pointer;text-align:left">
+            <span style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:8px">
+              <span style="font-size:12px;letter-spacing:.12em;font-weight:700;color:#8A6B71">{{ d.curto }}</span>
+              <sc-if value="{{ d.hoje }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:700;background:#F3EADB;color:#4E1A2A;padding:2px 8px;border-radius:999px">Hoje</span></sc-if>
+            </span>
+            <span class="psa-tab-nome" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;line-height:1">{{ d.nome }}</span>
+          </button>
+        </sc-if>
       </sc-for>
-      <a href="cardapio.html" style="flex:none;width:min(calc(min(56svh,560px) * .75),68vw);aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(24px,2.4vw,36px);background:#4E1A2A;color:#F3EADB">
-        <img src="assets/selo-neg.png" alt="" style="width:56px;height:56px;border-radius:50%;display:block">
-        <span style="display:flex;flex-direction:column;gap:18px">
-          <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,2.8vw,42px);line-height:1.02;font-weight:400">Ver o cardápio e montar o pedido</span>
-          <span style="font-size:14px;color:#E6D3BD;border-top:1px solid rgba(201,162,122,.5);padding-top:14px">Encomendas pelo WhatsApp</span>
-        </span>
-      </a>
+    </div>
+
+    <sc-for list="{{ painel }}" as="p" hint-placeholder-count="1">
+      <div role="tabpanel" aria-label="{{ p.nome }}" class="psa-fade psa-panel" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(20px,3vw,40px);background:#FFFFFF;border:1px solid #E8DCCB;border-radius:24px;padding:clamp(12px,1.6vw,20px);align-items:stretch">
+        <div class="psa-ph" style="position:relative;width:100%;aspect-ratio:4/5;align-self:start;border-radius:14px;overflow:hidden;background:#4E1A2A">
+          <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ true }}">
+            <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ p.pos }};display:block;filter:saturate(.95) contrast(1.04)">
+          </sc-if>
+          <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:32px;text-align:center;color:#F3EADB">
+              <img src="assets/selo-neg.png" alt="" loading="lazy" width="84" height="84" style="width:84px;height:84px;border-radius:50%;display:block">
+              <span style="font-family:Playball,cursive;font-size:clamp(44px,5vw,64px);line-height:1">{{ p.destaque }}</span>
+              <span style="font-size:13px;letter-spacing:.08em;color:#C9A27A">Foto em breve</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ p.ilus }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;right:12px;bottom:12px;background:rgba(42,14,23,.75);color:#F3EADB;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600">Imagem ilustrativa</span>
+          </sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:22px;padding:clamp(12px,2vw,28px) clamp(8px,1.6vw,20px)">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:13px;color:#B4683C;font-weight:700;letter-spacing:.06em">{{ p.contagem }}</span>
+            <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(36px,4vw,56px);line-height:1">{{ p.nome }}</h3>
+          </div>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+            <sc-for list="{{ p.itens }}" as="it" hint-placeholder-count="3">
+              <li style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #EFE5D7">
+                <span style="width:14px;height:14px;border-radius:50%;flex:none;background:{{ it.cor }};box-shadow:inset 0 0 0 1px rgba(78,26,42,.12)"></span>
+                <span style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0">
+                  <span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;line-height:1.1">{{ it.nome }}</span>
+                  <sc-if value="{{ it.desc }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;line-height:1.5;color:#6E4B53">{{ it.desc }}</span></sc-if>
+                </span>
+                <sc-if value="{{ it.peso }}" hint-placeholder-val="{{ false }}"><span style="flex:none;font-size:13px;font-weight:700;color:#6E4B53;background:#F3EADB;padding:4px 10px;border-radius:999px">{{ it.peso }}</span></sc-if>
+              </li>
+            </sc-for>
+          </ul>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-top:auto">
+            <a href="{{ p.wa }}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:12px;background:#4E1A2A;color:#F3EADB;min-height:54px;padding:0 24px;border-radius:999px;font-weight:700;font-size:16px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.2A8.4 8.4 0 1 1 21 11.5z"></path></svg>
+              <span>{{ p.cta }}</span>
+            </a>
+            <span style="font-size:13px;line-height:1.5;color:#8A6B71;text-align:center">{{ p.prazo }} · Preços a combinar com o cliente</span>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(20px,3vw,40px);background:#2A0E17;color:#F3EADB;border-radius:24px;padding:clamp(12px,1.6vw,20px);align-items:center">
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+        <div style="aspect-ratio:4/5;border-radius:14px;overflow:hidden"><img src="assets/torta%20red%20velvet.jpeg" alt="Torta red velvet com morangos" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div style="aspect-ratio:4/5;border-radius:14px;overflow:hidden"><img src="assets/torta%20matilda.jpeg" alt="Torta Matilda com morangos" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px;padding:clamp(12px,2vw,28px)">
+        <span style="font-size:13px;letter-spacing:.08em;color:#C9A27A;font-weight:700">SOB ENCOMENDA</span>
+        <h3 style="margin:0;font-family:Playball,cursive;font-weight:400;font-size:clamp(48px,5.6vw,80px);line-height:.95">Tortas</h3>
+        <p style="margin:0;font-size:16px;line-height:1.7;color:#E6D3BD;max-width:28em">Red velvet com cream cheese e morangos, Matilda com renda de chocolate. Feitas sob encomenda, na data que você combinar com a gente.</p>
+        <a href="{{ waTortas }}" target="_blank" rel="noopener" style="align-self:flex-start;display:flex;align-items:center;gap:12px;background:#F3EADB;color:#4E1A2A;min-height:52px;padding:0 24px;border-radius:999px;font-weight:700;font-size:15px">
+          <span>Encomendar uma torta</span>
+          <span style="width:28px;height:1px;background:#B4683C"></span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="casa" data-screen-label="A casa" style="background:#FBF6F0;color:#4E1A2A;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))">
-  <div style="position:relative;min-height:min(100svh,920px,125vw);overflow:hidden">
-    <img id="casa-img" src="assets/sobre.jpg" alt="A confeiteira do Pão Santo Afonso" style="position:absolute;inset:-8% 0;width:100%;height:116%;object-fit:cover;object-position:50% 25%;display:block;filter:saturate(.85) contrast(1.04) sepia(.08)">
-    <div id="casa-curtain" style="position:absolute;inset:0;background:#4E1A2A;transform-origin:top"></div>
-    <span style="position:absolute;left:clamp(20px,4vw,56px);bottom:28px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:#F3EADB;text-shadow:0 1px 12px rgba(0,0,0,.4)">Na cozinha de casa</span>
+<section id="fornada" data-screen-label="A fornada" style="background:#F3EADB;color:#4E1A2A;padding:clamp(72px,10vh,120px) 0">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:0 clamp(16px,4vw,56px);flex-wrap:wrap;margin-bottom:clamp(28px,4vh,44px)">
+    <h2 data-reveal="1" style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(44px,6vw,92px);line-height:.9;letter-spacing:-.01em">A fornada</h2>
+    <div class="psa-hide-m" style="display:flex;gap:10px">
+      <button onClick="{{ prev }}" aria-label="Fotos anteriores" style="width:48px;height:48px;border-radius:50%;border:1px solid #D9C6AE;background:#FBF6F0;color:#4E1A2A;cursor:pointer;display:flex;align-items:center;justify-content:center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+      </button>
+      <button onClick="{{ next }}" aria-label="Próximas fotos" style="width:48px;height:48px;border-radius:50%;border:none;background:#4E1A2A;color:#F3EADB;cursor:pointer;display:flex;align-items:center;justify-content:center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+      </button>
+    </div>
   </div>
-  <div style="display:flex;flex-direction:column;justify-content:center;gap:32px;padding:clamp(56px,10vh,120px) clamp(24px,6vw,96px)">
+  <div id="fornada-track" class="psa-track" style="display:flex;gap:clamp(14px,2vw,28px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 clamp(16px,4vw,56px);padding:0 clamp(16px,4vw,56px) 8px;-webkit-overflow-scrolling:touch">
+    <sc-for list="{{ fornada }}" as="p" hint-placeholder-count="5">
+      <figure class="psa-card" style="margin:0;flex:none;width:clamp(220px,24vw,340px);scroll-snap-align:start;display:flex;flex-direction:column">
+        <div style="width:100%;aspect-ratio:3/4;overflow:hidden;background:#E6D9C6;border-radius:4px">
+          <img src="{{ p.img }}" alt="{{ p.nome }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:{{ p.pos }};display:block;filter:saturate(.95) contrast(1.04)">
+        </div>
+        <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;padding-top:14px;margin-top:14px;border-top:1px solid #D9C6AE">
+          <span style="font-size:12px;color:#B4683C;font-weight:700;padding-top:6px;font-variant-numeric:tabular-nums">{{ p.n }}</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2vw,27px);font-weight:500;line-height:1.1">{{ p.nome }}</span>
+        </figcaption>
+      </figure>
+    </sc-for>
+  </div>
+</section>
+
+<section id="casa" data-screen-label="A casa" style="background:#FBF6F0;color:#4E1A2A;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))">
+  <div class="psa-casa" style="position:relative;min-height:min(100svh,880px,125vw);overflow:hidden">
+    <img id="casa-img" src="assets/sobre.jpg" alt="A confeiteira do Pão Santo Afonso" loading="lazy" style="position:absolute;inset:-8% 0;width:100%;height:116%;object-fit:cover;object-position:50% 25%;display:block;filter:saturate(.85) contrast(1.04) sepia(.08)">
+    <div id="casa-curtain" style="position:absolute;inset:0;background:#4E1A2A;transform-origin:top"></div>
+    <span style="position:absolute;left:clamp(16px,4vw,56px);bottom:28px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:#F3EADB;text-shadow:0 1px 12px rgba(0,0,0,.4)">Na cozinha de casa</span>
+  </div>
+  <div style="display:flex;flex-direction:column;justify-content:center;gap:32px;padding:clamp(56px,10vh,120px) clamp(20px,6vw,96px)">
     <h2 data-reveal="1" style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,4.8vw,72px);line-height:1;letter-spacing:-.01em;text-wrap:balance">Quem conhece o cliente pelo nome.</h2>
     <p data-reveal="1" data-reveal-delay="120" style="margin:0;font-size:17px;line-height:1.8;color:#6E4B53;max-width:30em;text-wrap:pretty">O Pão Santo Afonso nasceu na cozinha de casa. A marca é o frade que olha o doce com ternura: o cuidado de quem faz tudo à mão, devagar.</p>
-    <p data-reveal="1" data-reveal-delay="240" style="margin:0;font-size:17px;line-height:1.8;color:#6E4B53;max-width:30em;text-wrap:pretty">A gente assa em pequenas fornadas, recheia na hora e embrulha cada pedido separado com carinho. Do brigadeiro ao pão trançado, tudo sai daqui.</p>
+    <p data-reveal="1" data-reveal-delay="240" style="margin:0;font-size:17px;line-height:1.8;color:#6E4B53;max-width:30em;text-wrap:pretty">A gente assa em pequenas fornadas e embrulha cada pedido separado com carinho. Do pão de leite à torta de festa, tudo sai daqui.</p>
     <div data-line="1" style="display:flex;align-items:center;gap:10px;width:180px;transform-origin:left">
       <span style="flex:1;height:1px;background:#B4683C"></span>
       <span style="width:5px;height:5px;border-radius:50%;background:#B4683C"></span>
@@ -145,57 +279,39 @@ a:hover{color:#C9A27A}
   </div>
 </section>
 
-<section id="cor" data-screen-label="A cor" style="background:#2A0E17;padding:clamp(88px,15vh,170px) clamp(20px,4vw,56px) clamp(96px,16vh,180px);overflow:hidden">
+<section id="cor" data-screen-label="A cor" style="background:#2A0E17;padding:clamp(88px,15vh,170px) clamp(16px,4vw,56px) clamp(96px,16vh,180px);overflow:hidden">
   <div style="max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(48px,8vh,96px)">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,5vw,80px);align-items:end">
-      <h2 data-reveal="1" style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw,78px);line-height:1;letter-spacing:-.01em;color:#F3EADB;text-wrap:balance">Beterraba, batata e brócolis vão para a massa.</h2>
-      <p data-reveal="1" data-reveal-delay="120" style="margin:0;max-width:26em;font-size:16px;line-height:1.75;color:#E6D3BD;justify-self:end;text-wrap:pretty">A cor dos pães vem do que entra na receita. Trançados, mini pães com gergelim e a fornada de panetones de fim de ano.</p>
+      <h2 data-reveal="1" style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw,78px);line-height:1;letter-spacing:-.01em;color:#F3EADB;text-wrap:balance">Brócolis, beterraba, cenoura e moranga vão para a massa.</h2>
+      <p data-reveal="1" data-reveal-delay="120" style="margin:0;max-width:26em;font-size:16px;line-height:1.75;color:#E6D3BD;justify-self:end;text-wrap:pretty">A cor dos pães vem do que entra na receita. Toda segunda e sexta, a fornada colorida de 50 g sai do forno.</p>
     </div>
-    <sc-if value="{{ corWide }}" hint-placeholder-val="{{ true }}">
-    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.4vw,32px);align-items:start">
+    <div class="psa-cor psa-track" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(14px,2.4vw,32px);align-items:start">
       <figure style="margin:0;display:flex;flex-direction:column;gap:14px;min-width:0">
-        <div style="aspect-ratio:3/4;overflow:hidden;background:#3A1420"><img id="par1" src="assets/ilustrativa-1.jpg" alt="Mini pães coloridos com gergelim" style="width:100%;height:120%;margin-top:-10%;object-fit:cover;display:block;filter:saturate(.9) contrast(1.05) brightness(.92);will-change:transform"></div>
-        <figcaption style="display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#C9A27A;border-top:1px solid rgba(201,162,122,.35);padding-top:12px"><span>Mini pães</span><span>I</span></figcaption>
+        <div style="aspect-ratio:3/4;overflow:hidden;background:#3A1420"><img src="assets/imagem%20ilustrativa.jpeg" alt="Pãezinhos coloridos na forma, prontos para assar" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:50% 55%;display:block;filter:saturate(.9) contrast(1.05) brightness(.92)"></div>
+        <figcaption style="display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#C9A27A;border-top:1px solid rgba(201,162,122,.35);padding-top:12px"><span>Pãezinhos coloridos · imagem ilustrativa</span><span>I</span></figcaption>
       </figure>
-      <figure style="margin:clamp(40px,7vw,110px) 0 0;display:flex;flex-direction:column;gap:14px;min-width:0">
-        <div style="aspect-ratio:3/4;overflow:hidden;background:#3A1420"><img id="par2" src="assets/pao-trancado.jpg" alt="Pão trançado de beterraba, batata e brócolis" style="width:100%;height:120%;margin-top:-10%;object-fit:cover;display:block;filter:saturate(.9) contrast(1.05) brightness(.92);will-change:transform"></div>
+      <figure style="margin:0;display:flex;flex-direction:column;gap:14px;min-width:0">
+        <div style="aspect-ratio:3/4;overflow:hidden;background:#3A1420"><img src="assets/pao-trancado.jpg" alt="Pão trançado colorido" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9) contrast(1.05) brightness(.92)"></div>
         <figcaption style="display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#C9A27A;border-top:1px solid rgba(201,162,122,.35);padding-top:12px"><span>Pão trançado</span><span>II</span></figcaption>
       </figure>
       <figure style="margin:0;display:flex;flex-direction:column;gap:14px;min-width:0">
-        <div style="aspect-ratio:3/4;overflow:hidden;background:#3A1420"><img id="par3" src="assets/ilustrativa-2.jpg" alt="Pães e panetones da fornada" style="width:100%;height:120%;margin-top:-10%;object-fit:cover;display:block;filter:saturate(.9) contrast(1.05) brightness(.92);will-change:transform"></div>
-        <figcaption style="display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#C9A27A;border-top:1px solid rgba(201,162,122,.35);padding-top:12px"><span>Fornada de fim de ano</span><span>III</span></figcaption>
+        <div style="aspect-ratio:3/4;overflow:hidden;background:#3A1420"><img src="assets/foto%20ilustrativa.jpeg" alt="Pães coloridos servidos com chá" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:50% 70%;display:block;filter:saturate(.9) contrast(1.05) brightness(.92)"></div>
+        <figcaption style="display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#C9A27A;border-top:1px solid rgba(201,162,122,.35);padding-top:12px"><span>Hora do café · imagem ilustrativa</span><span>III</span></figcaption>
       </figure>
     </div>
-    </sc-if>
-    <sc-if value="{{ corNarrow }}" hint-placeholder-val="{{ false }}">
-      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px;align-items:start">
-        <figure style="margin:0;display:flex;flex-direction:column;gap:10px;min-width:0;grid-column:1 / -1">
-          <img src="assets/pao-trancado.jpg" alt="Pão trançado de beterraba, batata e brócolis" style="width:100%;aspect-ratio:1200/1600;height:auto;object-fit:cover;display:block;filter:saturate(.9) contrast(1.05) brightness(.92)">
-          <figcaption style="display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#C9A27A;border-top:1px solid rgba(201,162,122,.35);padding-top:12px"><span>Pão trançado</span><span>II</span></figcaption>
-        </figure>
-        <figure style="margin:0;display:flex;flex-direction:column;gap:10px;min-width:0">
-          <img src="assets/ilustrativa-1.jpg" alt="Mini pães coloridos com gergelim" style="width:100%;aspect-ratio:899/1599;height:auto;object-fit:cover;display:block;filter:saturate(.9) contrast(1.05) brightness(.92)">
-          <figcaption style="display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#C9A27A;border-top:1px solid rgba(201,162,122,.35);padding-top:12px"><span>Mini pães</span><span>I</span></figcaption>
-        </figure>
-        <figure style="margin:0;display:flex;flex-direction:column;gap:10px;min-width:0">
-          <img src="assets/ilustrativa-2.jpg" alt="Pães e panetones da fornada" style="width:100%;aspect-ratio:1200/1600;height:auto;object-fit:cover;display:block;filter:saturate(.9) contrast(1.05) brightness(.92)">
-          <figcaption style="display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#C9A27A;border-top:1px solid rgba(201,162,122,.35);padding-top:12px"><span>Fim de ano</span><span>III</span></figcaption>
-        </figure>
-      </div>
-    </sc-if>
   </div>
 </section>
 
-<section data-screen-label="Palavras da casa" style="background:#4E1A2A;padding:clamp(40px,7vh,72px) 0;overflow:hidden;display:flex;flex-direction:column;gap:8px">
-  <div id="mq1" style="display:flex;width:max-content;will-change:transform">
+<section data-screen-label="Palavras da casa" aria-hidden="true" style="background:#4E1A2A;padding:clamp(40px,7vh,72px) 0;overflow:hidden;display:flex;flex-direction:column;gap:8px">
+  <div class="psa-mq" style="display:flex;width:max-content">
     <sc-for list="{{ mqRow }}" as="m" hint-placeholder-count="14">
       <span style="display:flex;align-items:center;gap:clamp(24px,3vw,48px);padding-right:clamp(24px,3vw,48px);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(44px,6vw,96px);line-height:1.1;color:#F3EADB;white-space:nowrap">
         <span>{{ m }}</span>
-        <svg width="22" height="22" viewBox="0 0 12 12"><path d="M6 0L7.6 4.4L12 6L7.6 7.6L6 12L4.4 7.6L0 6L4.4 4.4Z" fill="#C9A27A"></path></svg>
+        <svg width="22" height="22" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 0L7.6 4.4L12 6L7.6 7.6L6 12L4.4 7.6L0 6L4.4 4.4Z" fill="#C9A27A"></path></svg>
       </span>
     </sc-for>
   </div>
-  <div id="mq2" style="display:flex;width:max-content;will-change:transform">
+  <div class="psa-mq-r" style="display:flex;width:max-content">
     <sc-for list="{{ mqRow2 }}" as="m" hint-placeholder-count="14">
       <span style="display:flex;align-items:center;gap:clamp(24px,3vw,48px);padding-right:clamp(24px,3vw,48px);font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,96px);line-height:1.1;color:transparent;-webkit-text-stroke:1px #C9A27A;white-space:nowrap">
         <span>{{ m }}</span>
@@ -205,220 +321,149 @@ a:hover{color:#C9A27A}
   </div>
 </section>
 
-<section data-screen-label="Encomendas" style="background:#F3EADB;color:#4E1A2A">
-  <div style="max-width:1320px;margin:0 auto;padding:clamp(80px,13vh,150px) clamp(20px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(40px,6vw,96px);align-items:end">
+<section id="encomendas" data-screen-label="Encomendas" style="background:#F3EADB;color:#4E1A2A">
+  <div style="max-width:1320px;margin:0 auto;padding:clamp(80px,13vh,150px) clamp(16px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(40px,6vw,96px);align-items:end">
     <div style="display:flex;flex-direction:column;gap:20px">
-      <span style="font-size:13px;letter-spacing:.08em;color:#B4683C;font-weight:600">Encomendas abertas</span>
-      <h2 data-reveal="1" style="margin:0;font-family:Playball,cursive;font-weight:400;font-size:clamp(64px,9vw,140px);line-height:.95;color:#4E1A2A">Bolos de festa</h2>
+      <span style="font-size:13px;letter-spacing:.08em;color:#B4683C;font-weight:700">ENCOMENDAS ABERTAS</span>
+      <h2 data-reveal="1" style="margin:0;font-family:Playball,cursive;font-weight:400;font-size:clamp(64px,9vw,140px);line-height:.95;color:#4E1A2A">Peça na véspera</h2>
     </div>
-    <div style="display:flex;flex-direction:column;gap:32px">
-      <p data-reveal="1" data-reveal-delay="120" style="margin:0;font-size:clamp(17px,1.5vw,20px);line-height:1.75;color:#4E1A2A;text-wrap:pretty">Você escolhe no cardápio e manda o pedido pelo WhatsApp. A gente confirma a data, separa a fornada e embrulha. Retirada ou entrega no dia combinado. Prazo a combinar com o cliente.</p>
-      <a href="cardapio.html" data-magnet="1" data-cursor="Pedir" style="align-self:flex-start;display:flex;align-items:center;gap:18px;background:#4E1A2A;color:#F3EADB;padding:22px 32px;font-weight:600;font-size:16px" style-hover="background:#2A0E17;color:#F3EADB">
-        <span>Montar meu pedido</span>
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px">
+        <li style="display:flex;gap:16px;align-items:baseline;font-size:clamp(16px,1.4vw,19px);line-height:1.6"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#B4683C;min-width:24px">1</span><span>Escolha o dia no cardápio da semana.</span></li>
+        <li style="display:flex;gap:16px;align-items:baseline;font-size:clamp(16px,1.4vw,19px);line-height:1.6"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#B4683C;min-width:24px">2</span><span>Mande o pedido pelo WhatsApp até 1 dia antes.</span></li>
+        <li style="display:flex;gap:16px;align-items:baseline;font-size:clamp(16px,1.4vw,19px);line-height:1.6"><span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#B4683C;min-width:24px">3</span><span>Retire na Rua Ricardo Nichele, 135, ou combine a entrega.</span></li>
+      </ol>
+      <a href="{{ waLink }}" target="_blank" rel="noopener" style="align-self:flex-start;display:flex;align-items:center;gap:18px;background:#4E1A2A;color:#F3EADB;padding:0 32px;min-height:60px;border-radius:999px;font-weight:700;font-size:16px">
+        <span>Falar no WhatsApp</span>
         <span style="width:36px;height:1px;background:#C9A27A"></span>
       </a>
     </div>
   </div>
 </section>
 
-<footer data-screen-label="Créditos" style="background:#2A0E17;color:#E6D3BD;padding:clamp(96px,16vh,180px) clamp(20px,4vw,56px) 40px">
+<footer class="psa-foot" data-screen-label="Créditos" style="background:#2A0E17;color:#E6D3BD;padding:clamp(88px,14vh,160px) clamp(16px,4vw,56px) 40px">
   <div style="max-width:640px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:56px">
-    <img data-reveal="1" src="assets/logo-neg.png" alt="Pão Santo Afonso Confeitaria" style="width:min(220px,60%);display:block">
+    <img data-reveal="1" src="assets/logo-neg.png" alt="Pão Santo Afonso Confeitaria" loading="lazy" style="width:min(220px,60%);display:block">
     <div style="width:100%;display:flex;flex-direction:column;gap:18px">
       <sc-for list="{{ creditos }}" as="c" hint-placeholder-count="5">
-        <div data-reveal="1" style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:baseline">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:baseline">
           <span style="text-align:right;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:#C9A27A">{{ c.k }}</span>
           <span style="font-size:15px;color:#F3EADB">{{ c.v }}</span>
         </div>
       </sc-for>
     </div>
-    <a href="{{ waLink }}" data-magnet="1" style="font-size:14px;color:#F3EADB;border-bottom:1px solid #C9A27A;padding-bottom:4px">Falar no WhatsApp</a>
+    <a href="{{ waLink }}" target="_blank" rel="noopener" style="font-size:14px;color:#F3EADB;border-bottom:1px solid #C9A27A;padding:12px 0 4px">Falar no WhatsApp</a>
   </div>
-  <div style="max-width:1320px;margin:clamp(80px,12vh,140px) auto 0;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;color:#A88A7E">
+  <div style="max-width:1320px;margin:clamp(72px,10vh,120px) auto 0;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;color:#A88A7E">
     <span>Pão Santo Afonso · Confeitaria</span>
     <span>feito com devoção</span>
   </div>
 </footer>
+
+<sc-if value="{{ showFab }}" hint-placeholder-val="{{ false }}">
+  <a href="#cardapio" style="position:fixed;left:16px;right:16px;bottom:16px;z-index:35;display:flex;align-items:center;justify-content:center;gap:12px;background:#4E1A2A;color:#F3EADB;min-height:54px;border-radius:999px;font-weight:700;font-size:15px;box-shadow:0 14px 40px rgba(42,14,23,.35)">
+    <span>Cardápio de {{ hojeNome }}</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
+  </a>
+</sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;(54) 99948-6578&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props='{"whatsapp":{"editor":"text","default":"(54) 99948-6578","tsType":"string"},"$preview":{"width":1440,"height":900}}'>
 class Component extends DCLogic {
-  state = { count: 0, solid: false, slide: 0, vw: typeof window !== 'undefined' ? window.innerWidth : 1200 };
+  state = { solid: false, slide: 0, dia: null, y: 0, vw: typeof window !== 'undefined' ? window.innerWidth : 1200 };
 
   slides = [
-    { nome: 'Morango cravejado', img: 'assets/morango.jpg', pos: '50% 62%' },
-    { nome: 'Brigadeiros', img: 'assets/brigadeiros.jpg', pos: '50% 50%' },
-    { nome: 'Sonho de doce de leite', img: 'assets/sonho.jpg', pos: '50% 55%' },
-    { nome: 'Bolo red velvet', img: 'assets/red-velvet.jpg', pos: '30% 45%' }
+    { nome: 'Pão de leite', img: 'assets/p%C3%A3o%20de%20leite%2050g.jpeg', pos: '50% 50%' },
+    { nome: 'Torta red velvet', img: 'assets/torta%20red%20velvet.jpeg', pos: '50% 50%' },
+    { nome: 'Pão de milho batido', img: 'assets/p%C3%A3o%20de%20milho%20batido.jpeg', pos: '50% 35%' },
+    { nome: 'Torta Matilda', img: 'assets/torta%20matilda.jpeg', pos: '50% 45%' }
   ];
   SLIDE_MS = 6000;
+
+  paes50 = [
+    { nome: 'Pão de leite', cor: '#E9C27D', peso: '50 g' },
+    { nome: 'Pão de brócolis', cor: '#7E9A3E', peso: '50 g' },
+    { nome: 'Pão de beterraba', cor: '#A3284B', peso: '50 g' },
+    { nome: 'Pão de cenoura', cor: '#E07A2A', peso: '50 g' },
+    { nome: 'Pão de moranga cabotiá', cor: '#D9A126', peso: '50 g' }
+  ];
+
+  dias = [
+    { id: 1, curto: 'SEG', nome: 'Segunda', img: 'assets/foto%20ilustrativa.jpeg', pos: '50% 72%', ilus: true, alt: 'Pães coloridos de 50 g', itens: 'paes50' },
+    { id: 2, curto: 'TER', nome: 'Terça', destaque: 'Cueca virada', img: 'assets/grostoli.jpg', pos: '50% 50%', alt: 'Cueca virada', itens: [{ nome: 'Cueca virada', cor: '#C98B4A', desc: 'Massa frita, torcida à mão e passada no açúcar.' }] },
+    { id: 3, curto: 'QUA', nome: 'Quarta', destaque: 'Nega maluca', itens: [{ nome: 'Nega maluca', cor: '#4A2418', desc: 'Bolo de chocolate fofinho com cobertura de chocolate.' }] },
+    { id: 4, curto: 'QUI', nome: 'Quinta', img: 'assets/p%C3%A3o%20de%20milho%20batido.jpeg', pos: '50% 30%', alt: 'Pão de milho batido', itens: [{ nome: 'Pão de milho batido', cor: '#E6B54A', desc: 'Pão de forma de milho, massa batida e casca dourada.' }] },
+    { id: 5, curto: 'SEX', nome: 'Sexta', img: 'assets/imagem%20ilustrativa.jpeg', pos: '50% 55%', ilus: true, alt: 'Pãezinhos coloridos de 50 g na forma', itens: 'paes50' }
+  ];
 
   componentDidMount() {
     const $ = id => document.getElementById(id);
     const $$ = s => Array.from(document.querySelectorAll(s));
+    const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.timers = [];
     this.lastY = window.scrollY;
-    this.mqX = [0, 0];
-    this.vel = 0;
-
-    this.syncCart = () => {
-      try { const c = JSON.parse(localStorage.getItem('psa-cart') || '[]'); this.setState({ count: c.reduce((s, i) => s + i.qtd, 0) }); } catch (e) {}
-    };
-    this.syncCart();
-    window.addEventListener('storage', this.syncCart);
-    window.addEventListener('focus', this.syncCart);
-
-    // ---- optimized scroll engine: measure on layout, transform-only per frame, one rAF loop with lerp ----
     const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-    const lerp = (a, b, t) => a + (b - a) * t;
     const absTop = el => el.getBoundingClientRect().top + window.scrollY;
-    this.m = null;
-    this.sy = window.scrollY;
+
     this.layout = () => {
-      const sec = $('fornada'), tr = $('fornada-track'), it = $('intertitulo');
-      if (!sec || !tr) return;
-      const vw = window.innerWidth, vh = window.innerHeight;
-      tr.style.transform = 'none';
-      const dist = Math.max(0, tr.scrollWidth - vw);
-      sec.style.height = (vh + dist) + 'px';
+      const it = $('intertitulo');
       this.m = {
-        vw, vh, dist,
-        fTop: absTop(sec), fSpan: Math.max(1, sec.offsetHeight - vh),
-        iTop: it ? absTop(it) : 0, iSpan: it ? Math.max(1, it.offsetHeight - vh) : 1,
-        words: $$('[data-w]'),
-        frames: $$('[data-fimg]').map(img => { const f = img.parentElement.parentElement; return { img, x: f.offsetLeft, w: f.offsetWidth }; }),
-        par: [['casa-img', 6], ['par1', 7], ['par2', -7], ['par3', 7]].map(([id, k]) => { const el = $(id); if (!el) return null; const p = el.parentElement; return { el, top: absTop(p), h: p.offsetHeight, k }; }).filter(Boolean),
-        hero: $('hero-media'), track: tr, bar: $('fornada-bar'), cnt: $('fornada-count'), selo: $('inter-selo'), hdr: $('site-header'),
-        mq: [$('mq1'), $('mq2')].map(el => el && { el, half: el.scrollWidth / 2 || 1 })
+        vh: window.innerHeight,
+        iTop: it ? absTop(it) : 0, iSpan: it ? Math.max(1, it.offsetHeight - window.innerHeight) : 1,
+        words: $$('[data-w]'), hero: $('hero-media'), selo: $('inter-selo'), hdr: $('site-header')
       };
-      this.cache = {};
-      this.sy = window.scrollY;
-      this.render(true);
+      this.paint();
     };
-    const set = (el, key, val) => { if (this.cache[key] !== val) { this.cache[key] = val; el.style.transform = val; } };
-    this.render = force => {
+    this.paint = () => {
+      this.raf = 0;
       const m = this.m; if (!m) return;
-      const y = this.sy, vh = m.vh;
-      if (m.hero && y < vh * 1.3) set(m.hero, 'hero', 'translate3d(0,' + (y * 0.3).toFixed(1) + 'px,0)');
-      const ip = clamp((y - m.iTop) / m.iSpan);
-      if (force || (y > m.iTop - vh && y < m.iTop + m.iSpan + vh)) {
-        const n = m.words.length;
-        m.words.forEach((w, i) => { const o = clamp(ip * 1.35 * n - i, 0.14, 1).toFixed(2); if (w.__o !== o) { w.__o = o; w.style.opacity = o; } });
-        if (m.selo) set(m.selo, 'selo', 'scale(' + (0.85 + ip * 0.25).toFixed(3) + ')');
+      const y = window.scrollY;
+      if (m.hero && y < m.vh * 1.2 && !reduce && window.innerWidth >= 760) m.hero.style.transform = 'translate3d(0,' + (y * 0.3).toFixed(1) + 'px,0)';
+      if (y > m.iTop - m.vh && y < m.iTop + m.iSpan + m.vh) {
+        const ip = clamp((y - m.iTop) / m.iSpan), n = m.words.length;
+        m.words.forEach((w, i) => { const o = reduce ? '1' : clamp(ip * 1.35 * n - i, 0.14, 1).toFixed(2); if (w.__o !== o) { w.__o = o; w.style.opacity = o; } });
+        if (m.selo && !reduce) m.selo.style.transform = 'scale(' + (0.85 + ip * 0.25).toFixed(3) + ')';
       }
-      if (force || (y > m.fTop - vh && y < m.fTop + m.fSpan + vh)) {
-        const p = clamp((y - m.fTop) / m.fSpan), tx = p * m.dist;
-        set(m.track, 'track', 'translate3d(' + (-tx).toFixed(1) + 'px,0,0)');
-        if (m.bar) m.bar.style.width = (p * 100).toFixed(2) + '%';
-        if (m.cnt) { const n = m.frames.length, t = String(Math.min(n, Math.round(p * (n - 1)) + 1)).padStart(2, '0') + ' / ' + String(n).padStart(2, '0'); if (m.cnt.textContent !== t) m.cnt.textContent = t; }
-        m.frames.forEach((f, i) => { const c = clamp((f.x - tx + f.w / 2 - m.vw / 2) / m.vw, -1, 1); set(f.img, 'f' + i, 'translate3d(' + (-c * 6).toFixed(2) + '%,0,0)'); });
-      }
-      m.par.forEach((q, i) => {
-        if (y + vh < q.top - 50 || y > q.top + q.h + 50) return;
-        const c = (q.top + q.h / 2 - y - vh / 2) / vh;
-        set(q.el, 'p' + i, 'translate3d(0,' + (c * q.k).toFixed(2) + '%,0)');
-      });
     };
     this.onScroll = () => {
-      const y = window.scrollY, d = y - this.lastY;
-      this.vel = d;
-      const m = this.m;
-      if (m && m.hdr) { const v = (d > 4 && y > m.vh) ? 'translateY(-100%)' : (d < -4 || y < m.vh) ? 'none' : null; if (v !== null && m.hdr.style.transform !== v) m.hdr.style.transform = v; }
+      const y = window.scrollY, d = y - this.lastY, m = this.m;
+      if (m && m.hdr) { const v = (d > 6 && y > m.vh) ? 'translateY(-100%)' : (d < -6 || y < m.vh) ? 'none' : null; if (v !== null && m.hdr.style.transform !== v) m.hdr.style.transform = v; }
       const solid = y > window.innerHeight * 0.85;
       if (solid !== this.state.solid) this.setState({ solid });
+      const fab = y > window.innerHeight * 0.9;
+      if (fab !== this.state.fab) this.setState({ fab });
       this.lastY = y;
+      if (!this.raf) this.raf = requestAnimationFrame(this.paint);
     };
     window.addEventListener('scroll', this.onScroll, { passive: true });
-    this.lastW = window.innerWidth; this.lastH = window.innerHeight;
     this.onResize = () => {
       clearTimeout(this.rz);
-      this.rz = setTimeout(() => {
-        const w = window.innerWidth, hh = window.innerHeight;
-        // ignore mobile address-bar height jitter
-        if (w === this.lastW && Math.abs(hh - this.lastH) < 150 && this.m) return;
-        this.lastW = w; this.lastH = hh;
-        if (w !== this.state.vw) this.setState({ vw: w }, () => setTimeout(this.layout, 50)); else this.layout();
-      }, 140);
+      this.rz = setTimeout(() => { if (window.innerWidth !== this.state.vw) this.setState({ vw: window.innerWidth }); this.layout(); }, 160);
     };
     window.addEventListener('resize', this.onResize);
     window.addEventListener('load', this.layout);
-    this.tick = () => this.render(true);
 
-    const loop = () => {
-      const target = window.scrollY;
-      if (Math.abs(target - this.sy) > 0.4) { this.sy = lerp(this.sy, target, 0.16); this.render(false); }
-      else if (this.sy !== target) { this.sy = target; this.render(false); }
-      const m = this.m;
-      if (m) {
-        const boost = Math.min(18, Math.abs(this.vel || 0)) * 0.35;
-        m.mq.forEach((q, i) => {
-          if (!q) return;
-          const dir = i ? 1 : -1;
-          this.mqX[i] += dir * (0.5 + boost);
-          if (this.mqX[i] <= -q.half) this.mqX[i] += q.half;
-          if (this.mqX[i] > 0) this.mqX[i] -= q.half;
-          q.el.style.transform = 'translate3d(' + this.mqX[i].toFixed(1) + 'px,0,0)';
-        });
-      }
-      this.vel = (this.vel || 0) * 0.9;
-      this.loopRaf = requestAnimationFrame(loop);
-    };
-    this.loopRaf = requestAnimationFrame(loop);
-
-    // reveals
     this.io = new IntersectionObserver(es => es.forEach(e => {
       if (!e.isIntersecting) return;
       this.io.unobserve(e.target);
       const t = e.target;
-      if (t.id === 'casa-curtain') t.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], { duration: 1400, easing: 'cubic-bezier(.7,0,.2,1)', fill: 'forwards' });
-      else if (t.dataset.line) t.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 1200, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards', delay: 300 });
-      else t.animate([{ opacity: 0, transform: 'translateY(32px)', filter: 'blur(6px)' }, { opacity: 1, transform: 'none', filter: 'blur(0)' }], { duration: 1300, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards', delay: +(t.dataset.revealDelay || 0) });
+      if (reduce) { if (t.id === 'casa-curtain') t.style.transform = 'scaleY(0)'; return; }
+      if (t.id === 'casa-curtain') t.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], { duration: 1200, easing: 'cubic-bezier(.7,0,.2,1)', fill: 'forwards' });
+      else if (t.dataset.line) t.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 1000, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards', delay: 300 });
+      else t.animate([{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'none' }], { duration: 1000, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards', delay: +(t.dataset.revealDelay || 0) });
     }), { threshold: 0.2 });
-    this.observeReveals = () => $$('[data-reveal],[data-line],#casa-curtain').forEach(el => { if (!el.__obs) { el.__obs = 1; this.io.observe(el); } });
 
-    // custom cursor + magnetic buttons (mouse only)
-    if (window.matchMedia && matchMedia('(pointer:fine)').matches) {
-      const cur = $('cursor'), lab = $('cursor-label');
-      let mx = -100, my = -100, cx = -100, cy = -100;
-      this.onMove = e => {
-        mx = e.clientX; my = e.clientY;
-        if (cur && cur.style.display !== 'flex') cur.style.display = 'flex';
-        const calm = e.target.closest && e.target.closest('#fornada,#cor');
-        if (cur) cur.style.opacity = calm ? '0' : '1';
-        const tgt = e.target.closest && e.target.closest('[data-cursor]');
-        if (cur && lab) {
-          const label = tgt ? tgt.dataset.cursor : '';
-          if (lab.textContent !== label) {
-            lab.textContent = label;
-            const s = label ? 76 : 14;
-            cur.style.width = s + 'px'; cur.style.height = s + 'px'; cur.style.margin = (-s / 2) + 'px 0 0 ' + (-s / 2) + 'px';
-          }
-        }
-        $$('[data-magnet]').forEach(m => {
-          const r = m.getBoundingClientRect();
-          const dx = mx - (r.left + r.width / 2), dy = my - (r.top + r.height / 2);
-          const near = Math.abs(dx) < r.width / 2 + 40 && Math.abs(dy) < r.height / 2 + 40;
-          m.style.transition = 'transform .5s cubic-bezier(.2,.7,.2,1)';
-          m.style.transform = near ? `translate(${dx * 0.22}px,${dy * 0.3}px)` : 'none';
-        });
-      };
-      window.addEventListener('mousemove', this.onMove);
-      const follow = () => { cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2; if (cur) cur.style.transform = `translate3d(${cx}px,${cy}px,0)`; this.curRaf = requestAnimationFrame(follow); };
-      this.curRaf = requestAnimationFrame(follow);
-    }
-
-    // hero slideshow with Ken Burns
     this.runSlide = (i, first) => {
       const imgs = $$('[data-slide]'); if (!imgs.length) return;
       const n = imgs.length, cur = imgs[i % n], prev = imgs[(i - 1 + n) % n];
       if (!first) {
-        cur.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1600, easing: 'ease-in-out', fill: 'forwards' });
-        prev.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 1600, easing: 'ease-in-out', fill: 'forwards', delay: 200 });
-      } else {
-        cur.animate([{ opacity: 0, filter: 'saturate(.95) contrast(1.08) brightness(.3)' }, { opacity: 1, filter: 'saturate(.95) contrast(1.08) brightness(.8)' }], { duration: 2200, easing: 'ease-out', fill: 'forwards' });
+        cur.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1400, easing: 'ease-in-out', fill: 'forwards' });
+        prev.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 1400, easing: 'ease-in-out', fill: 'forwards', delay: 200 });
       }
-      const dirs = ['translate(-2%,1%)', 'translate(2%,-1%)', 'translate(1%,2%)', 'translate(-1%,-2%)'];
-      cur.animate([{ transform: 'scale(1.14) ' + dirs[i % 4] }, { transform: 'scale(1) translate(0,0)' }], { duration: this.SLIDE_MS + 1800, easing: 'linear', fill: 'forwards' });
+      if (!reduce) {
+        const dirs = ['translate(-2%,1%)', 'translate(2%,-1%)', 'translate(1%,2%)', 'translate(-1%,-2%)'];
+        cur.animate([{ transform: 'scale(1.12) ' + dirs[i % 4] }, { transform: 'scale(1) translate(0,0)' }], { duration: this.SLIDE_MS + 1600, easing: 'linear', fill: 'forwards' });
+      }
       $$('[data-ind]').forEach((b, k) => {
         b.getAnimations && b.getAnimations().forEach(a => a.cancel());
         b.style.width = k < i % n ? '100%' : '0%';
@@ -428,85 +473,101 @@ class Component extends DCLogic {
       this.timers.push(setTimeout(() => this.runSlide((i + 1) % n, false), this.SLIDE_MS));
     };
 
-    // intro: header + title
     const intro = () => {
-      const l1 = $('hero-l1'), l2 = $('hero-l2');
+      if (reduce) return;
       const ease = 'cubic-bezier(.2,.8,.2,1)';
-      l1 && l1.animate([{ transform: 'translateY(105%)' }, { transform: 'none' }], { duration: 1500, easing: ease, delay: 400, fill: 'backwards' });
-      l2 && l2.animate([{ transform: 'translateY(105%)' }, { transform: 'none' }], { duration: 1500, easing: ease, delay: 580, fill: 'backwards' });
-      ['hero-sub', 'hero-side'].forEach((id, k) => { const el = $(id); el && el.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 1200, easing: ease, delay: 1100 + k * 200, fill: 'backwards' }); });
-      const lg = $('header-logo'), nv = $('header-nav');
-      lg && lg.animate([{ opacity: 0, transform: 'translateY(-16px)' }, { opacity: 1, transform: 'none' }], { duration: 1100, easing: ease, delay: 200, fill: 'backwards' });
-      nv && nv.animate([{ opacity: 0, transform: 'translateY(-16px)' }, { opacity: 1, transform: 'none' }], { duration: 1100, easing: ease, delay: 350, fill: 'backwards' });
+      [['hero-l1', 300], ['hero-l2', 460]].forEach(([id, d]) => { const el = $(id); el && el.animate([{ transform: 'translateY(105%)' }, { transform: 'none' }], { duration: 1300, easing: ease, delay: d, fill: 'backwards' }); });
+      ['hero-sub', 'hero-cta', 'hero-side'].forEach((id, k) => { const el = $(id); el && el.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 1000, easing: ease, delay: 900 + k * 150, fill: 'backwards' }); });
     };
 
     const boot = n => {
-      if ((!$('fornada-track') || !$$('[data-slide]').length) && n < 50) { this.timers.push(setTimeout(() => boot(n + 1), 100)); return; }
+      if (!$$('[data-slide]').length && n < 50) { this.timers.push(setTimeout(() => boot(n + 1), 100)); return; }
       this.layout();
-      this.observeReveals();
+      $$('[data-reveal],[data-line],#casa-curtain').forEach(el => this.io.observe(el));
+      const menu = $('cardapio');
+      if (menu) {
+        this.menuIo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting !== this.state.inMenu) this.setState({ inMenu: e.isIntersecting }); }), { threshold: 0.05 });
+        this.menuIo.observe(menu);
+      }
       intro();
       this.runSlide(0, true);
-      const fixImgs = () => $$('img').forEach(im => {
-        if (im.complete && im.naturalWidth === 0 && im.getAttribute('src') && !im.getAttribute('src').includes('{{')) im.src = im.getAttribute('src');
-        if (!im.complete) im.addEventListener('load', this.onResize, { once: true });
-      });
-      fixImgs();
-      this.timers.push(setTimeout(fixImgs, 500), setTimeout(fixImgs, 1500));
     };
     boot(0);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('storage', this.syncCart);
-    window.removeEventListener('focus', this.syncCart);
     window.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.onResize);
     window.removeEventListener('load', this.layout);
-    this.onMove && window.removeEventListener('mousemove', this.onMove);
-    cancelAnimationFrame(this.loopRaf); cancelAnimationFrame(this.curRaf);
+    cancelAnimationFrame(this.raf);
     (this.timers || []).forEach(clearTimeout);
     this.io && this.io.disconnect();
+    this.menuIo && this.menuIo.disconnect();
+  }
+
+  scrollTrack(dir) {
+    const t = document.getElementById('fornada-track');
+    if (t) t.scrollBy({ left: dir * Math.max(260, t.clientWidth * 0.8), behavior: 'smooth' });
   }
 
   renderVals() {
     const num = this.props.whatsapp ?? '(54) 99948-6578';
-    const items = [
-      ['Bolo red velvet', 'R$ 120', 'red-velvet'],
-      ['Brigadeiros', 'R$ 30 · 12 un.', 'brigadeiros'],
-      ['Beijinho', 'R$ 30 · 12 un.', 'beijinho'],
-      ['Morango cravejado', 'R$ 7', 'morango'],
-      ['Quindim', 'R$ 8', 'quindim'],
-      ['Sonho', 'R$ 9', 'sonho'],
-      ['Pão trançado', 'R$ 22', 'pao-trancado'],
-      ['Grostoli', 'R$ 18', 'grostoli'],
-      ['Panetone e chocotone', 'R$ 45', 'panetones']
+    const wa = 'https://wa.me/55' + num.replace(/\D/g, '');
+    const waMsg = t => wa + '?text=' + encodeURIComponent(t);
+    const hoje = new Date().getDay();
+    const hojeUtil = hoje >= 1 && hoje <= 5;
+    const diaSel = this.state.dia ?? (hojeUtil ? hoje : 1);
+    const itensDe = d => d.itens === 'paes50' ? this.paes50 : d.itens;
+    const sel = this.dias.find(d => d.id === diaSel) || this.dias[0];
+    const selItens = itensDe(sel);
+    const hojeDia = this.dias.find(d => d.id === hoje);
+    const fornada = [
+      ['Pão de leite 50 g', 'assets/p%C3%A3o%20de%20leite%2050g.jpeg', '50% 50%'],
+      ['Pães coloridos', 'assets/foto%20ilustrativa.jpeg', '50% 72%'],
+      ['Pão de milho batido', 'assets/p%C3%A3o%20de%20milho%20batido.jpeg', '50% 30%'],
+      ['Torta red velvet', 'assets/torta%20red%20velvet.jpeg', '50% 45%'],
+      ['Torta Matilda', 'assets/torta%20matilda.jpeg', '50% 45%'],
+      ['Pão de leite', 'assets/p%C3%A3o%20de%20leite.jpeg', '50% 40%'],
+      ['Pão integral 50 g', 'assets/p%C3%A3o%20integral%2050g.jpeg', '50% 50%'],
+      ['Pão trançado', 'assets/pao-trancado.jpg', '50% 50%'],
+      ['Sonho', 'assets/sonho.jpg', '50% 50%']
     ];
     const palavras = ['feito com devoção', 'receita do mosteiro', 'fornada', 'uma bênção', 'com calma', 'feito hoje', 'separado com carinho'];
     return {
-      navBg: this.state.solid ? 'rgba(42,14,23,.94)' : 'transparent',
-      showGrain: this.state.vw >= 1024,
-      showNavLinks: this.state.vw >= 640,
-      interH: this.state.vw < 720 ? '170svh' : '220svh',
-      corGrid: this.state.vw < 720
-        ? 'display:grid;grid-auto-flow:column;grid-auto-columns:76vw;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -20px;padding:0 20px 8px;scroll-padding:0 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch'
-        : 'display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2.4vw,32px);align-items:start',
-      corMid: this.state.vw < 720 ? '0' : 'clamp(40px,7vw,110px) 0 0',
-      corWide: this.state.vw >= 720,
-      corNarrow: this.state.vw < 720,
-      hasCart: this.state.count > 0,
-      cartCount: this.state.count,
-      slides: this.slides.map((s, i) => ({ ...s, i, op: i === 0 ? 1 : 0 })),
+      navBg: this.state.solid ? 'rgba(42,14,23,.92)' : 'transparent',
+      navBlur: this.state.solid ? 'blur(10px)' : 'none',
+      showNavLinks: this.state.vw >= 760,
+      showFab: !!this.state.fab && !this.state.inMenu && this.state.vw < 760,
+      interH: this.state.vw < 720 ? '130svh' : '190svh',
+      waLink: wa,
+      waTortas: waMsg('Olá! Quero encomendar uma torta no Pão Santo Afonso.'),
+      todayLink: hojeUtil ? '#cardapio' : wa,
+      todayCta: hojeUtil ? 'Hoje tem: ' + (hojeDia.destaque || 'pães de 50 g') : 'Falar no WhatsApp',
+      hojeNome: hojeUtil ? hojeDia.nome.toLowerCase() : 'segunda',
+      slides: this.slides.map((s, i) => ({ ...s, i, op: i === 0 ? 1 : 0, prio: i === 0 ? 'high' : 'low' })),
       slideNome: this.slides[this.state.slide].nome,
       interWords: 'Tudo feito à mão, devagar, como quem reza enquanto bate a massa.'.split(' '),
-      fornada: items.map(([nome, preco, img], i) => ({ n: String(i + 1).padStart(2, '0'), nome, preco, img: 'assets/' + img + '.jpg' })),
+      dias: this.dias.map(d => ({ ...d, active: d.id === diaSel, inactive: d.id !== diaSel, hoje: d.id === hoje, pick: () => this.setState({ dia: d.id }) })),
+      painel: [{
+        nome: sel.nome,
+        img: sel.img || '', pos: sel.pos || '50% 50%', alt: sel.alt || sel.nome,
+        hasImg: !!sel.img, noImg: !sel.img, ilus: !!sel.ilus, destaque: sel.destaque || '',
+        contagem: selItens.length > 1 ? selItens.length + ' opções no dia' : 'O destaque do dia',
+        itens: selItens.map(it => ({ ...it, desc: it.desc || null, peso: it.peso || null })),
+        cta: 'Encomendar para ' + sel.nome.toLowerCase(),
+        prazo: 'Peça até ' + (sel.id === 1 ? 'domingo' : this.dias[sel.id - 2].nome.toLowerCase()),
+        wa: waMsg('Olá! Quero encomendar para ' + sel.nome.toLowerCase() + ':\n' + selItens.map(it => '• ' + it.nome + (it.peso ? ' ' + it.peso : '') + ' — quantidade: ').join('\n'))
+      }],
+      fornada: fornada.map(([nome, img, pos], i) => ({ n: String(i + 1).padStart(2, '0'), nome, img, pos })),
+      prev: () => this.scrollTrack(-1),
+      next: () => this.scrollTrack(1),
       mqRow: [...palavras, ...palavras],
       mqRow2: [...palavras.slice(3), ...palavras.slice(0, 3), ...palavras.slice(3), ...palavras.slice(0, 3)],
-      waLink: 'https://wa.me/55' + num.replace(/\D/g, ''),
       creditos: [
         { k: 'Confeitaria', v: 'Pão Santo Afonso' },
         { k: 'Pedidos', v: 'WhatsApp ' + num },
-        { k: 'Prazo', v: 'a combinar com o cliente' },
-        { k: 'Preços', v: 'a combinar com o cliente' },
+        { k: 'Prazo', v: '1 dia antes' },
+        { k: 'Tortas', v: 'sob encomenda' },
         { k: 'Redes', v: '@paosantoafonso' },
         { k: 'Retirada', v: 'Rua Ricardo Nichele, 135' }
       ]
