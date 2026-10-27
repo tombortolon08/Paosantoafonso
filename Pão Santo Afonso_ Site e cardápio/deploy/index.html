@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2A0E17">
+<meta name="description" content="Pães da vó Marcia · padaria caseira. Cardápio da semana e encomendas pelo WhatsApp.">
 <title>Pães da vó Marcia · Padaria caseira</title>
 <script src="./support.js"></script>
 </head>
@@ -45,7 +47,15 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .psa-cor{grid-template-columns:none !important;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 4px;scroll-padding:0 16px}
 .psa-cor > figure{scroll-snap-align:start}
 .psa-foot{padding-bottom:110px !important}
+.psa-enc{padding:0 !important;width:44px;justify-content:center}
+.psa-enc-label{display:none}
+.psa-ph-inner{gap:8px !important;padding:16px !important}
+.psa-ph-selo{width:64px !important;height:64px !important}
+.psa-ph-selo svg{width:60px;height:60px}
+.psa-ph-nome{font-size:36px !important}
+#site-header > div{padding-top:10px !important;padding-bottom:10px !important}
 }
+@media (max-width:420px){#header-logo{gap:9px !important}#header-logo > span:first-child{width:40px !important;height:40px !important}#header-logo > span:first-child svg{width:36px;height:36px}}
 @media (max-width:370px){.psa-brand-sub{display:none}.psa-brand{font-size:19px !important}}
 .v-cor{--arc:#B4683C;--star:#A8322A;--robe:#4E1A2A;--robeline:#7A3A4A;--collar:#F3EADB;--skin:#F3EADB;--skinshade:#E3CFB6;--hair:#C9A27A;--hairline:#9C7650;--line:#4E1A2A;--cheek:#A8322A;--bread:#B4683C;--breadshade:#8E4A26;--breadlight:#D9935F;--score:#F3EADB}
 .v-neg{--arc:#C9A27A;--star:#F3EADB;--robe:#EADCC6;--robeline:#C9B194;--collar:#C9A27A;--skin:#FBF6EE;--skinshade:#E3CFB6;--hair:#C9A27A;--hairline:#9C7650;--line:#4E1A2A;--cheek:#E07A6A;--bread:#B4683C;--breadshade:#8E4A26;--breadlight:#D9935F;--score:#F3EADB}
@@ -98,7 +108,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 </defs>
 </svg>
 
-<header id="site-header" style="position:fixed;top:0;left:0;right:0;z-index:40;background:{{ navBg }};backdrop-filter:{{ navBlur }};transition:background .4s ease,transform .5s cubic-bezier(.2,.7,.2,1)">
+<header id="site-header" style="position:fixed;top:0;left:0;right:0;z-index:40;background:{{ navBg }};backdrop-filter:{{ navBlur }};-webkit-backdrop-filter:{{ navBlur }};transition:background .4s ease,transform .5s cubic-bezier(.2,.7,.2,1)">
   <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px clamp(16px,4vw,56px)">
     <a id="header-logo" href="#topo" style="display:flex;align-items:center;gap:12px;color:#F3EADB">
       <span class="v-cor" style="width:46px;height:46px;flex:none;border-radius:50%;background:#F3EADB;border:2px solid #B4683C;overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
@@ -115,9 +125,9 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
         <a href="#fornada" style="padding:12px 0">A fornada</a>
         <a href="#casa" style="padding:12px 0">A casa</a>
       </sc-if>
-      <a href="{{ waLink }}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:#F3EADB;color:#4E1A2A;padding:0 18px;min-height:44px;border-radius:999px;font-weight:700">
+      <a href="{{ waLink }}" target="_blank" rel="noopener" aria-label="Encomendar pelo WhatsApp" class="psa-enc" style="display:flex;align-items:center;gap:10px;background:#F3EADB;color:#4E1A2A;padding:0 18px;min-height:44px;border-radius:999px;font-weight:700">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.2A8.4 8.4 0 1 1 21 11.5z"></path></svg>
-        <span>Encomendar</span>
+        <span class="psa-enc-label">Encomendar</span>
       </a>
     </nav>
   </div>
@@ -126,7 +136,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 <section id="topo" data-screen-label="Abertura" style="position:relative;height:100svh;min-height:600px;overflow:hidden;background:#2A0E17">
   <div id="hero-media" style="position:absolute;inset:0;will-change:transform">
     <sc-for list="{{ slides }}" as="s" hint-placeholder-count="1">
-      <img data-slide="{{ s.i }}" src="{{ s.img }}" alt="{{ s.nome }}" fetchpriority="{{ s.prio }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ s.pos }};opacity:{{ s.op }};filter:saturate(.95) contrast(1.08) brightness(.8);display:block">
+      <img data-slide="{{ s.i }}" src="{{ s.img }}" alt="{{ s.nome }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ s.pos }};opacity:{{ s.op }};filter:saturate(.95) contrast(1.08) brightness(.8);display:block">
     </sc-for>
   </div>
   <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(42,14,23,.97) 0%,rgba(42,14,23,.6) 36%,rgba(42,14,23,.15) 68%,rgba(42,14,23,.5) 100%)"></div>
@@ -142,7 +152,7 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
           <span>Ver o cardápio da semana</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
         </a>
-        <a href="{{ todayLink }}" style="display:flex;align-items:center;gap:10px;border:1px solid rgba(243,234,219,.55);color:#F3EADB;padding:0 22px;min-height:52px;border-radius:999px;font-weight:600;font-size:15px">
+        <a href="{{ todayLink }}" target="{{ todayTarget }}" rel="noopener" style="display:flex;align-items:center;gap:10px;border:1px solid rgba(243,234,219,.55);color:#F3EADB;padding:0 22px;min-height:52px;border-radius:999px;font-weight:600;font-size:15px">
           <span>{{ todayCta }}</span>
         </a>
       </div>
@@ -228,11 +238,11 @@ a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
             <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ p.pos }};display:block;filter:saturate(.95) contrast(1.04)">
           </sc-if>
           <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}">
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:32px;text-align:center;color:#F3EADB">
-              <span class="v-neg" style="width:96px;height:96px;border-radius:50%;background:#2A0E17;border:2px solid #C9A27A;overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
+            <div class="psa-ph-inner" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:32px;text-align:center;color:#F3EADB">
+              <span class="v-neg psa-ph-selo" style="width:96px;height:96px;border-radius:50%;background:#2A0E17;border:2px solid #C9A27A;overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
                 <svg width="90" height="90" aria-hidden="true"><use href="#vo"></use></svg>
               </span>
-              <span style="font-family:Playball,cursive;font-size:clamp(44px,5vw,64px);line-height:1">{{ p.destaque }}</span>
+              <span class="psa-ph-nome" style="font-family:Playball,cursive;font-size:clamp(44px,5vw,64px);line-height:1">{{ p.destaque }}</span>
               <span style="font-size:13px;letter-spacing:.08em;color:#C9A27A">Foto em breve</span>
             </div>
           </sc-if>
@@ -453,11 +463,11 @@ class Component extends DCLogic {
   ];
 
   dias = [
-    { id: 1, curto: 'SEG', nome: 'Segunda', img: 'assets/foto%20ilustrativa.jpeg', pos: '50% 72%', ilus: true, alt: 'Pães coloridos de 50 g', itens: 'paes50' },
-    { id: 2, curto: 'TER', nome: 'Terça', destaque: 'Cueca virada', img: 'assets/grostoli.jpg', pos: '50% 50%', alt: 'Cueca virada', itens: [{ nome: 'Cueca virada', cor: '#C98B4A', desc: 'Massa frita, torcida à mão e passada no açúcar.' }] },
-    { id: 3, curto: 'QUA', nome: 'Quarta', destaque: 'Nega maluca', itens: [{ nome: 'Nega maluca', cor: '#4A2418', desc: 'Bolo de chocolate fofinho com cobertura de chocolate.' }] },
-    { id: 4, curto: 'QUI', nome: 'Quinta', img: 'assets/p%C3%A3o%20de%20milho%20batido.jpeg', pos: '50% 30%', alt: 'Pão de milho batido', itens: [{ nome: 'Pão de milho batido', cor: '#E6B54A', desc: 'Pão de forma de milho, massa batida e casca dourada.' }] },
-    { id: 5, curto: 'SEX', nome: 'Sexta', img: 'assets/imagem%20ilustrativa.jpeg', pos: '50% 55%', ilus: true, alt: 'Pãezinhos coloridos de 50 g na forma', itens: 'paes50' }
+    { id: 1, curto: 'SEG', nome: 'Segunda', chamada: 'pães de 50 g', img: 'assets/foto%20ilustrativa.jpeg', pos: '50% 72%', ilus: true, alt: 'Pães coloridos de 50 g', itens: 'paes50' },
+    { id: 2, curto: 'TER', nome: 'Terça', destaque: 'Cueca virada', chamada: 'cueca virada', img: 'assets/grostoli.jpg', pos: '50% 50%', alt: 'Cueca virada', itens: [{ nome: 'Cueca virada', cor: '#C98B4A', desc: 'Massa frita, torcida à mão e passada no açúcar.' }] },
+    { id: 3, curto: 'QUA', nome: 'Quarta', destaque: 'Nega maluca', chamada: 'nega maluca', itens: [{ nome: 'Nega maluca', cor: '#4A2418', desc: 'Bolo de chocolate fofinho com cobertura de chocolate.' }] },
+    { id: 4, curto: 'QUI', nome: 'Quinta', chamada: 'pão de milho batido', img: 'assets/p%C3%A3o%20de%20milho%20batido.jpeg', pos: '50% 30%', alt: 'Pão de milho batido', itens: [{ nome: 'Pão de milho batido', cor: '#E6B54A', desc: 'Pão de forma de milho, massa batida e casca dourada.' }] },
+    { id: 5, curto: 'SEX', nome: 'Sexta', chamada: 'pães de 50 g', img: 'assets/imagem%20ilustrativa.jpeg', pos: '50% 55%', ilus: true, alt: 'Pãezinhos coloridos de 50 g na forma', itens: 'paes50' }
   ];
 
   componentDidMount() {
@@ -514,13 +524,18 @@ class Component extends DCLogic {
       if (reduce) { if (t.id === 'casa-curtain') t.style.transform = 'scaleY(0)'; return; }
       if (t.id === 'casa-curtain') t.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], { duration: 1200, easing: 'cubic-bezier(.7,0,.2,1)', fill: 'forwards' });
       else if (t.dataset.line) t.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 1000, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards', delay: 300 });
-      else t.animate([{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'none' }], { duration: 1000, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards', delay: +(t.dataset.revealDelay || 0) });
-    }), { threshold: 0.2 });
+      else {
+        const a = t.animate([{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'none' }], { duration: 1000, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards', delay: +(t.dataset.revealDelay || 0) });
+        t.style.opacity = '';
+        a.onfinish = () => a.cancel();
+      }
+    }), { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
     this.runSlide = (i, first) => {
       const imgs = $$('[data-slide]'); if (!imgs.length) return;
       const n = imgs.length, cur = imgs[i % n], prev = imgs[(i - 1 + n) % n];
       if (!first) {
+        cur.getAnimations && cur.getAnimations().forEach(a => a.cancel());
         cur.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1400, easing: 'ease-in-out', fill: 'forwards' });
         prev.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 1400, easing: 'ease-in-out', fill: 'forwards', delay: 200 });
       }
@@ -533,21 +548,27 @@ class Component extends DCLogic {
         b.style.width = k < i % n ? '100%' : '0%';
         if (k === i % n) b.animate([{ width: '0%' }, { width: '100%' }], { duration: this.SLIDE_MS, easing: 'linear', fill: 'forwards' });
       });
-      this.setState({ slide: i % n });
-      this.timers.push(setTimeout(() => this.runSlide((i + 1) % n, false), this.SLIDE_MS));
+      if (window.innerWidth > 640 && this.state.slide !== i % n) this.setState({ slide: i % n });
+      clearTimeout(this.slideT);
+      this.slideT = setTimeout(() => this.runSlide((i + 1) % n, false), this.SLIDE_MS);
+      this.timers.push(this.slideT);
     };
 
     const intro = () => {
       if (reduce) return;
       const ease = 'cubic-bezier(.2,.8,.2,1)';
       [['hero-l1', 300], ['hero-l2', 460]].forEach(([id, d]) => { const el = $(id); el && el.animate([{ transform: 'translateY(105%)' }, { transform: 'none' }], { duration: 1300, easing: ease, delay: d, fill: 'backwards' }); });
-      ['hero-sub', 'hero-cta', 'hero-side'].forEach((id, k) => { const el = $(id); el && el.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 1000, easing: ease, delay: 900 + k * 150, fill: 'backwards' }); });
+      ['hero-sub', 'hero-cta', 'hero-side'].forEach((id, k) => { const el = $(id); el && el.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 1000, easing: ease, delay: 650 + k * 120, fill: 'backwards' }); });
     };
 
     const boot = n => {
       if (!$$('[data-slide]').length && n < 50) { this.timers.push(setTimeout(() => boot(n + 1), 100)); return; }
       this.layout();
-      $$('[data-reveal],[data-line],#casa-curtain').forEach(el => this.io.observe(el));
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.layout && this.layout());
+      $$('[data-reveal],[data-line],#casa-curtain').forEach(el => {
+        if (!reduce && el.dataset.reveal && el.getBoundingClientRect().top > window.innerHeight) el.style.opacity = '0';
+        this.io.observe(el);
+      });
       const menu = $('cardapio');
       if (menu) {
         this.menuIo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting !== this.state.inMenu) this.setState({ inMenu: e.isIntersecting }); }), { threshold: 0.05 });
@@ -606,7 +627,8 @@ class Component extends DCLogic {
       waLink: wa,
       waTortas: waMsg('Olá! Quero encomendar uma torta nos Pães da vó Marcia.'),
       todayLink: hojeUtil ? '#cardapio' : wa,
-      todayCta: hojeUtil ? 'Hoje tem: ' + (hojeDia.destaque || 'pães de 50 g') : 'Falar no WhatsApp',
+      todayTarget: hojeUtil ? '_self' : '_blank',
+      todayCta: hojeUtil ? 'Hoje tem ' + hojeDia.chamada : 'Falar no WhatsApp',
       hojeNome: hojeUtil ? hojeDia.nome.toLowerCase() : 'segunda',
       slides: this.slides.map((s, i) => ({ ...s, i, op: i === 0 ? 1 : 0, prio: i === 0 ? 'high' : 'low' })),
       slideNome: this.slides[this.state.slide].nome,
